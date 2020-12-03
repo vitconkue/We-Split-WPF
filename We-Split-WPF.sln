@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "We-Split-WPF", "We-Split-WPF.csproj", "{557AFB39-9BD7-4948-9D99-24CBFC336D73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{557AFB39-9BD7-4948-9D99-24CBFC336D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{557AFB39-9BD7-4948-9D99-24CBFC336D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{557AFB39-9BD7-4948-9D99-24CBFC336D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{557AFB39-9BD7-4948-9D99-24CBFC336D73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F2D9BAA-4C71-487C-B299-87AEDC344F91}
+	EndGlobalSection
+EndGlobal
