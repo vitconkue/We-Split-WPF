@@ -5,10 +5,234 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:We_Split_WPF.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+      d:DesignHeight="750" d:DesignWidth="1350"
       Title="DetailPage">
 
+    <Page.Resources>
+        <Style x:Key="SidebarButton"  TargetType="Button">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Margin" Value="20 0"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="SidebarText" TargetType="TextBlock">
+            <Setter Property="Margin"  Value="10 0"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="0.8"></Setter>
+            <Setter Property="BorderBrush" Value="#4a4853"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Width" Value="250"></Setter>
+            <Setter Property="Margin"  Value="10 0"></Setter>
+            <Setter Property="Padding" Value="5"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"></Setter>
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="materialDesign:PackIcon">
+            <Setter Property="Height" Value="20"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        <Style x:Key="StackBorder" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#4a4853"></Setter>
+            <Setter Property="Width" Value="500"></Setter>
+            <Setter Property="Height" Value="400"></Setter>
+            <Setter Property="CornerRadius" Value="6"></Setter>
+            <Setter Property="BorderThickness" Value="0.8"></Setter>
+        </Style>
+        <Style x:Key="ButtonBorder" TargetType="Border">
+            <Setter Property="Width" Value="40">
+
+            </Setter>
+            <Setter Property="Height" Value="40">
+            </Setter>
+            <Setter Property="CornerRadius" Value="30"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderBrush" Value="Yellow"></Setter>
+            <Setter Property="Background" Value="#4a4853"></Setter>
+            <Setter Property="Margin" Value="10 0"></Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <DockPanel>
+            <StackPanel Background="#0099FF" Orientation="Horizontal" Height="50px" DockPanel.Dock="Top">
+                <Button Click="Button_Click" Style="{DynamicResource SidebarButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Foreground="Yellow" Kind="Home" Width="27"></materialDesign:PackIcon>
+                        <TextBlock Style="{DynamicResource SidebarText}" Foreground="Yellow" >TRANG CHỦ</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{DynamicResource SidebarButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Place" Width="24"></materialDesign:PackIcon>
+                        <TextBlock Style="{DynamicResource SidebarText}" >ĐỊA ĐIỂM</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{DynamicResource SidebarButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="People" Width="21"></materialDesign:PackIcon>
+                        <TextBlock Style="{DynamicResource SidebarText}" >THÀNH VIÊN</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{DynamicResource SidebarButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Information" Width="22"></materialDesign:PackIcon>
+                        <TextBlock Style="{DynamicResource SidebarText}" >GIỚI THIỆU</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{DynamicResource SidebarButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Search" Width="22"></materialDesign:PackIcon>
+                        <TextBlock Style="{DynamicResource SidebarText}" >TÌM KIẾM</TextBlock>
+                    </StackPanel>
+                </Button>
+                <StackPanel Margin="300 0 0 0">
+                <Button Style="{DynamicResource SidebarButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Delete" Width="22"></materialDesign:PackIcon>
+                        <TextBlock Style="{DynamicResource SidebarText}" >XÓA</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{DynamicResource SidebarButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Update" Width="22"></materialDesign:PackIcon>
+                        <TextBlock Style="{DynamicResource SidebarText}" >CẬP NHẬT</TextBlock>
+                    </StackPanel>
+                </Button>
+                </StackPanel>
+            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="10*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center" Grid.Row="0" FontSize="16" Padding="10" Height="30">VỊNH HẠ LONG</TextBlock>
+                        <StackPanel Width="400" Grid.Row="1">
+                            <Image Source="../Data/Images/200944.jpg" Width="400">
+                                
+                            </Image>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Center" Grid.Row="2">
+                            <Button Margin="0 0 10 0" Height="30" BorderBrush="#ff78" Background="#ff78">
+                                <materialDesign:PackIcon Kind="NavigateBefore"></materialDesign:PackIcon>
+                            </Button>
+                            <Button Height="30" BorderBrush="#ff78" Background="#ff78">
+                                <materialDesign:PackIcon Kind="NavigateNext"></materialDesign:PackIcon>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="10*"></RowDefinition>
+                             
+                        </Grid.RowDefinitions>
+                        <TextBlock  HorizontalAlignment="Center" Grid.Row="0" FontSize="16" Padding="10" Height="30">THÀNH VIÊN</TextBlock>
+                        <Grid Margin="0 0 0 10" Background="White" Width="400" Grid.Row="1">
+                            <DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn  Header="HỌ VÀ TÊN">
+                                       
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="SĐT">
+                                      
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="EMAIL">
+
+                                    </DataGridTextColumn>
+                                 
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition>
+                            
+                        </RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="10*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center" Padding="0 10" Grid.Row="0">THÔNG TIN CHUYẾN ĐI</TextBlock>
+                        <Grid Grid.Row="1">
+                            
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="10*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center" Padding="0 10" Grid.Row="0">THỐNG KÊ</TextBlock>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Image Source="../Data/Images/pie.png" Height="178" Margin="0,0,0,140.4" Width="371"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+               
+                <Grid.Background>
+                    <ImageBrush ImageSource="../Data/Images/g.png"></ImageBrush>
+                </Grid.Background>
+            </Grid>
+        </DockPanel>
+
     </Grid>
 </Page>
+
