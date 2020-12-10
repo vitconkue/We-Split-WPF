@@ -39,7 +39,6 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White">
-
             </Setter>
             <Setter Property="Margin"  Value="10 0"></Setter>
             <Setter Property="TextAlignment" Value="Center"></Setter>
@@ -81,8 +80,8 @@
             <StackPanel Background="#4a4853" Orientation="Horizontal" Height="60px" DockPanel.Dock="Top">
                 <Button>
                     <StackPanel>
-                        <materialDesign:PackIcon Kind="Home" Width="27"></materialDesign:PackIcon>
-                        <TextBlock >TRANG CHỦ</TextBlock>
+                        <materialDesign:PackIcon Foreground="#FFA500" Kind="Home" Width="27"></materialDesign:PackIcon>
+                        <TextBlock Foreground="#FFA500" >TRANG CHỦ</TextBlock>
                     </StackPanel>
                 </Button>
 
@@ -153,10 +152,10 @@
                     </Grid>
                     <StackPanel Grid.Column="1">
                         <StackPanel Orientation="Vertical">
-                            <StackPanel HorizontalAlignment="Center" Height="120" Margin="296,0" Width="99">
+                            <StackPanel HorizontalAlignment="Center" Height="120" Width="99">
                                 <StackPanel Margin="0,74,0,0" Width="112">
                                     <materialDesign:PackIcon Foreground="#add8e6" Kind="Island" Height="33" Margin="0,13,0,0" Width="23"></materialDesign:PackIcon>
-                                    <TextBlock FontSize="18" Height="25" Margin="10,21,10,0.4">ĐÃ ĐI</TextBlock>
+                                    <TextBlock FontSize="18" Height="25" Margin="10,21,10,0.4" Width="50">ĐÃ ĐI</TextBlock>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Height="400">
