@@ -154,9 +154,27 @@
                                     <materialDesign:PackIcon Foreground="#ff7875" Height="50" Width="40" Kind="NavigateBefore" HorizontalAlignment="Right"></materialDesign:PackIcon>
                                 </Button>
                                 <Border Style="{DynamicResource StackBorder}" >
-                                    <StackPanel>
+                                    <Grid>
+                                        <ListView Name="GoingTripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            <ListView.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ListView.ItemsPanel>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <materialDesign:TransitioningContent>
+                                                        <materialDesign:TransitioningContent.OpeningEffects>
+                                                            <materialDesign:TransitionEffect  Kind="SlideInFromRight"/>
+                                                        </materialDesign:TransitioningContent.OpeningEffects>
+                                               
+                                                    </materialDesign:TransitioningContent>
 
-                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                       
+                                        </ListView>
+                                    </Grid>
                                 </Border>
                                 <Button Style="{DynamicResource SidebarButton}" Height="50" Width="40">
                                     <materialDesign:PackIcon Foreground="#ff7875" Height="50" Width="40" Kind="NavigateNext" HorizontalAlignment="Right"/>
@@ -197,9 +215,27 @@
                                     <materialDesign:PackIcon Foreground="#ff7875" Height="50" Width="40" Kind="NavigateBefore"></materialDesign:PackIcon>
                                 </Button>
                                 <Border Style="{DynamicResource StackBorder}" >
-                                    <StackPanel>
+                                    <Grid>
+                                        <ListView Name="WentTripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            <ListView.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ListView.ItemsPanel>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <materialDesign:TransitioningContent>
+                                                        <materialDesign:TransitioningContent.OpeningEffects>
+                                                            <materialDesign:TransitionEffect  Kind="SlideInFromRight"/>
+                                                        </materialDesign:TransitioningContent.OpeningEffects>
 
-                                    </StackPanel>
+                                                    </materialDesign:TransitioningContent>
+
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+
+                                        </ListView>
+                                    </Grid>
                                 </Border>
                                 <Button Style="{DynamicResource SidebarButton}" Height="50" Width="40">
                                     <materialDesign:PackIcon Foreground="#ff7875" Height="50" Width="40" Kind="NavigateNext"/>

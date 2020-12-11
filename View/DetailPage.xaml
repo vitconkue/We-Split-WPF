@@ -169,7 +169,7 @@
                             <RowDefinition Height="10*"></RowDefinition>
 
                         </Grid.RowDefinitions>
-                        <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0"  Padding="0 10" Height="30">THÀNH VIÊN</TextBlock>
+                        <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0">THÀNH VIÊN</TextBlock>
                         <Grid Margin="0 0 0 10" Background="White" Width="400" Grid.Row="1">
                             <DataGrid>
                                 <DataGrid.Columns>
