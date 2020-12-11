@@ -25,9 +25,16 @@ namespace We_Split_WPF.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new View.SearchPage());
+        }
+
+        private void LocationButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new View.DetailPage());
         }
     }
+    
 }

@@ -88,7 +88,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Click="Button_Click" Style="{DynamicResource SidebarButton}">
+                <Button x:Name="LocationButton" Click="LocationButton_Click" Style="{DynamicResource SidebarButton}">
                     <StackPanel>
                         <materialDesign:PackIcon Kind="Place" Width="24"></materialDesign:PackIcon>
                         <TextBlock Style="{DynamicResource SidebarText}">ĐỊA ĐIỂM</TextBlock>
@@ -106,7 +106,7 @@
                         <TextBlock Style="{DynamicResource SidebarText}">GIỚI THIỆU</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{DynamicResource SidebarButton}">
+                <Button x:Name="SearchButton" Click="SearchButton_Click" Style="{DynamicResource SidebarButton}">
                     <StackPanel>
                         <materialDesign:PackIcon Kind="Search" Width="22"></materialDesign:PackIcon>
                         <TextBlock Style="{DynamicResource SidebarText}">TÌM KIẾM</TextBlock>
@@ -146,7 +146,7 @@
                             <StackPanel Grid.Row="0" HorizontalAlignment="Center">
                                 <StackPanel>
                                     <materialDesign:PackIcon Foreground="Green" Kind="Circle" Height="44" Width="25"/>
-                                    <TextBlock Style="{DynamicResource SidebarText}" Foreground="#ff78" FontSize="14"><Run Text="ĐANG ĐI"/></TextBlock>
+                                    <TextBlock Style="{DynamicResource SidebarText}" Foreground="Green" FontSize="14"><Run Text="ĐANG ĐI"/></TextBlock>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Row="1">
