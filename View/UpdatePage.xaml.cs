@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace We_Split_WPF.View
 {
     /// <summary>
-    /// Interaction logic for DetailPage.xaml
+    /// Interaction logic for UpdatePage.xaml
     /// </summary>
-    public partial class DetailPage : Page
+    public partial class UpdatePage : Page
     {
-        public DetailPage()
+        public UpdatePage()
         {
             InitializeComponent();
-        }
-
- 
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.HomePage());
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -37,10 +30,26 @@ namespace We_Split_WPF.View
             this.NavigationService.Navigate(new View.SearchPage());
         }
 
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new View.UpdatePage());
+            this.NavigationService.Navigate(new View.HomePage());
+        }
+
+    
+
+        private void LocationButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new View.DetailPage());
+        }
+
+        private void MemberButton_Click(object sender, RoutedEventArgs e)
+        {
+            An.Visibility = Visibility.Visible;
+        }
+
+        private void AddMoneyButton_Click(object sender, RoutedEventArgs e)
+        {
+            An.Visibility = Visibility.Collapsed;
         }
     }
 }
