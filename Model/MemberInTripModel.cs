@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace We_Split_WPF.Model
 {
-    class MemberInTripModel
+   public class MemberInTripModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -16,6 +16,7 @@ namespace We_Split_WPF.Model
         public void ShowConsole()
         {
             Console.WriteLine($"Member ID: {ID},Member Name: {Name},  Money Paid: {MoneyPaid}");
+           
         }
     }
 }

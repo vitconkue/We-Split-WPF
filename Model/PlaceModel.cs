@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace We_Split_WPF.Model
 {
-    class PlaceModel
+    public class PlaceModel
     {
         public int TripID { get; set; }
 

@@ -12,28 +12,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using We_Split_WPF.ViewModel;
 
 namespace We_Split_WPF.View
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class HomePage : UserControl
     {
         public HomePage()
         {
             InitializeComponent();
+           
+           
         }
 
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new View.SearchPage());
+            
         }
 
         private void LocationButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new View.DetailPage());
+            
         }
     }
     

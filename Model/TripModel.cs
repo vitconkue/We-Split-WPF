@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace We_Split_WPF.Model
 {
-    class TripModel
+    public class TripModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -147,6 +147,15 @@ namespace We_Split_WPF.Model
         public int CalculateMoneyLack()
         {
             return SumExpenses - MoneyReceived; 
+        }
+        public Uri ImageLink
+        {
+            get
+            {
+                string file = AppDomain.CurrentDomain.BaseDirectory;
+                Uri path = new Uri($"{file}Data\\Images\\TripsImage\\{ID}\\Main\\main.png");
+                return path;
+            }
         }
 
     }

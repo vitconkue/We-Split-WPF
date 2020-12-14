@@ -10,7 +10,7 @@ using Dapper;
 
 namespace We_Split_WPF.Model
 {
-    class DatabaseAccess
+    public class DatabaseAccess
     {
         private static string LoadConnectionString(string id = "Default")
         {

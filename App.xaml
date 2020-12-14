@@ -2,9 +2,19 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:We_Split_WPF"
+             xmlns:views="clr-namespace:We_Split_WPF.View"
+             xmlns:viewmodels="clr-namespace:We_Split_WPF.ViewModel"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
+       
         <ResourceDictionary>
+
+            <DataTemplate DataType="{x:Type viewmodels:HomePageViewModel}">
+                <views:HomePage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DetailPageViewModel}">
+                <views:DetailPage/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

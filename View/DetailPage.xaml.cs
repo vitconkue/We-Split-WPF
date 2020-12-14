@@ -18,7 +18,7 @@ namespace We_Split_WPF.View
     /// <summary>
     /// Interaction logic for DetailPage.xaml
     /// </summary>
-    public partial class DetailPage : Page
+    public partial class DetailPage : UserControl
     {
         public DetailPage()
         {
@@ -29,18 +29,15 @@ namespace We_Split_WPF.View
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new View.HomePage());
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new View.SearchPage());
         }
 
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new View.UpdatePage());
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿<Page x:Class="We_Split_WPF.View.HomePage"
+﻿<UserControl x:Class="We_Split_WPF.View.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:We_Split_WPF.View"
+      
       mc:Ignorable="d" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,9 +15,9 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
       d:DesignHeight="750" d:DesignWidth="1350"
-      Title="HomePage">
+      >
 
-    <Page.Resources>
+    <UserControl.Resources>
         <Style x:Key="SidebarButton"  TargetType="Button">
             <Setter Property="Background" Value="Transparent"></Setter>
             <Setter Property="BorderBrush" Value="Transparent"></Setter>
@@ -76,7 +77,7 @@
             <Setter Property="Background" Value="#ff7875"></Setter>
             <Setter Property="Margin" Value="10 0"></Setter>
         </Style>
-    </Page.Resources>
+    </UserControl.Resources>
     <Grid>
         <DockPanel>
 
@@ -88,7 +89,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="LocationButton" Click="LocationButton_Click" Style="{DynamicResource SidebarButton}">
+                <Button Command="{Binding UpdateHomeView}" x:Name="LocationButton" Click="LocationButton_Click" Style="{DynamicResource SidebarButton}">
                     <StackPanel>
                         <materialDesign:PackIcon Kind="Place" Width="24"></materialDesign:PackIcon>
                         <TextBlock Style="{DynamicResource SidebarText}">ĐỊA ĐIỂM</TextBlock>
@@ -103,7 +104,7 @@
                 <Button Style="{DynamicResource SidebarButton}">
                     <StackPanel>
                         <materialDesign:PackIcon Kind="Information" Width="22"></materialDesign:PackIcon>
-                        <TextBlock Style="{DynamicResource SidebarText}">GIỚI THIỆU</TextBlock>
+                        <TextBlock Text="THÔNG TIN" Style="{DynamicResource SidebarText}"></TextBlock>
                     </StackPanel>
                 </Button>
                 <Button x:Name="SearchButton" Click="SearchButton_Click" Style="{DynamicResource SidebarButton}">
@@ -144,7 +145,7 @@
 
                         <Border Style="{DynamicResource StackBorder}" >
                             <Grid>
-                                <ListView Name="GoingTripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListView ItemsSource="{Binding Trips}" Name="TripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                     <ListView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel />
@@ -156,7 +157,19 @@
                                                 <materialDesign:TransitioningContent.OpeningEffects>
                                                     <materialDesign:TransitionEffect  Kind="SlideInFromRight"/>
                                                 </materialDesign:TransitioningContent.OpeningEffects>
+                                                <StackPanel>
+                                                    <Border Width="250" Height="200">
+                                                        <Border.Background >
+                                                            <ImageBrush  ImageSource="{Binding ImageLink}"></ImageBrush>
+                                                        </Border.Background>
+                                                    </Border>
+                                                    <StackPanel  Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
 
+                                                        <TextBlock  FontSize="15" Margin="0 10 10 0" Text="{Binding Name}"></TextBlock>
+
+                                                        <Button Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView}" Margin="10 0 0 0">Xem chi tiết</Button>
+                                                    </StackPanel>
+                                                </StackPanel>
                                             </materialDesign:TransitioningContent>
 
                                         </DataTemplate>
@@ -188,4 +201,4 @@
         </DockPanel>
 
     </Grid>
-</Page>
+</UserControl>

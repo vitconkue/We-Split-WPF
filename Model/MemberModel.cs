@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace We_Split_WPF.Model
 {
-    class MemberModel
+   public class MemberModel
     {
         public int ID { get; set; }
         public string Name { get; set;  }

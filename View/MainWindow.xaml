@@ -13,9 +13,9 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="WeSplit" Height="800" Width="1350" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="WeSplit" Height="800" Width="1350" WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <Frame Name="frame" NavigationUIVisibility="Hidden"/>
+        <ContentControl Content="{Binding SelectedViewModel}"></ContentControl>
     </Grid>
 </Window>
