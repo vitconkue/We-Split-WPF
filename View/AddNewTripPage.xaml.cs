@@ -23,12 +23,8 @@ namespace We_Split_WPF.View
         public AddNewTripPage()
         {
             InitializeComponent();
-            List<Model.MemberModel> AllMember = new List<Model.MemberModel>();
-            AllMember = Model.DatabaseAccess.LoadAllMember();
         }
 
-        private List<Model.MemberInTripModel> memberList;
-        private List<Model.PlaceModel> placeList;
 
         private void LocationButton_Click(object sender, RoutedEventArgs e)
         {
