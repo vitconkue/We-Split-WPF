@@ -80,7 +80,7 @@
     <Grid>
         <DockPanel>
 
-            <StackPanel  Background="#0099FF" Orientation="Horizontal" Height="50px"  DockPanel.Dock="Top" >
+            <StackPanel  Background="#0099FF" Orientation="Horizontal" Height="50px"  DockPanel.Dock="Top" HorizontalAlignment="Left" Width="1350" >
                 <Button Style="{DynamicResource SidebarButton}">
                     <StackPanel>
                         <materialDesign:PackIcon Foreground="Yellow" Kind="Home" Width="27"></materialDesign:PackIcon>
@@ -112,7 +112,7 @@
                         <TextBlock Style="{DynamicResource SidebarText}">TÌM KIẾM</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Margin="400 0 0 0"  Style="{DynamicResource SidebarButton}">
+                <Button Margin="400 0 0 0"  Style="{DynamicResource SidebarButton}" x:Name="AddNewTripButton" Click="AddNewTripButton_Click">
                     <StackPanel>
                         <materialDesign:PackIcon Kind="AddCircleOutline" Width="22"></materialDesign:PackIcon>
                         <TextBlock Style="{DynamicResource SidebarText}">THÊM CHUYẾN ĐI</TextBlock>
