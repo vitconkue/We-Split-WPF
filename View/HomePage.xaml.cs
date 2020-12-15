@@ -28,10 +28,7 @@ namespace We_Split_WPF.View
            
         }
 
-        private void AddNewTripButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.AddNewTripPage());
-        }
+       
     }
     
 }

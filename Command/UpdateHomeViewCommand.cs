@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace We_Split_WPF.Command
 
         public void Execute(object parameter)
         {
-            ViewModel.SelectedViewModel = new DetailPageViewModel();
+        
+            ViewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(parameter));
         }
         public UpdateHomeViewCommand(MainViewModel viewModel)
         {
