@@ -24,20 +24,5 @@ namespace We_Split_WPF.View
         {
             InitializeComponent();
         }
-
- 
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
     }
 }

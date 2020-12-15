@@ -27,17 +27,6 @@ namespace We_Split_WPF.View
            
            
         }
-
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void LocationButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
     
 }

@@ -18,21 +18,13 @@ namespace We_Split_WPF.View
     /// <summary>
     /// Interaction logic for SearchPage.xaml
     /// </summary>
-    public partial class SearchPage : Page
+    public partial class SearchPage : UserControl
     {
         public SearchPage()
         {
             InitializeComponent();
         }
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.HomePage());
-        }
-
-        private void LocationButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.DetailPage());
-        }
+    
     }
 }

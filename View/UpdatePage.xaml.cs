@@ -18,38 +18,12 @@ namespace We_Split_WPF.View
     /// <summary>
     /// Interaction logic for UpdatePage.xaml
     /// </summary>
-    public partial class UpdatePage : Page
+    public partial class UpdatePage : UserControl
     {
         public UpdatePage()
         {
             InitializeComponent();
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.SearchPage());
-        }
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.HomePage());
-        }
-
-    
-
-        private void LocationButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.DetailPage());
-        }
-
-        private void MemberButton_Click(object sender, RoutedEventArgs e)
-        {
-            An.Visibility = Visibility.Visible;
-        }
-
-        private void AddMoneyButton_Click(object sender, RoutedEventArgs e)
-        {
-            An.Visibility = Visibility.Collapsed;
-        }
     }
 }

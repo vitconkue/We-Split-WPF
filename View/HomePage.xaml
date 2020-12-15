@@ -14,7 +14,6 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-      d:DesignHeight="750" d:DesignWidth="1350"
       >
 
     <UserControl.Resources>
@@ -78,48 +77,7 @@
             <Setter Property="Margin" Value="10 0"></Setter>
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <DockPanel>
-
-            <StackPanel  Background="#0099FF" Orientation="Horizontal" Height="50px"  DockPanel.Dock="Top" >
-                <Button Style="{DynamicResource SidebarButton}">
-                    <StackPanel>
-                        <materialDesign:PackIcon Foreground="Yellow" Kind="Home" Width="27"></materialDesign:PackIcon>
-                        <TextBlock Style="{DynamicResource SidebarText}" Foreground="Yellow" >TRANG CHỦ</TextBlock>
-                    </StackPanel>
-                </Button>
-
-                <Button Command="{Binding UpdateHomeView}" x:Name="LocationButton" Click="LocationButton_Click" Style="{DynamicResource SidebarButton}">
-                    <StackPanel>
-                        <materialDesign:PackIcon Kind="Place" Width="24"></materialDesign:PackIcon>
-                        <TextBlock Style="{DynamicResource SidebarText}">ĐỊA ĐIỂM</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Style="{DynamicResource SidebarButton}">
-                    <StackPanel>
-                        <materialDesign:PackIcon Kind="People" Width="21"></materialDesign:PackIcon>
-                        <TextBlock Style="{DynamicResource SidebarText}">THÀNH VIÊN</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Style="{DynamicResource SidebarButton}">
-                    <StackPanel>
-                        <materialDesign:PackIcon Kind="Information" Width="22"></materialDesign:PackIcon>
-                        <TextBlock Text="THÔNG TIN" Style="{DynamicResource SidebarText}"></TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="SearchButton" Click="SearchButton_Click" Style="{DynamicResource SidebarButton}">
-                    <StackPanel>
-                        <materialDesign:PackIcon Kind="Search" Width="22"></materialDesign:PackIcon>
-                        <TextBlock Style="{DynamicResource SidebarText}">TÌM KIẾM</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Margin="400 0 0 0"  Style="{DynamicResource SidebarButton}">
-                    <StackPanel>
-                        <materialDesign:PackIcon Kind="AddCircleOutline" Width="22"></materialDesign:PackIcon>
-                        <TextBlock Style="{DynamicResource SidebarText}">THÊM CHUYẾN ĐI</TextBlock>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+  
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -198,7 +156,5 @@
                     <ImageBrush ImageSource="../Data/Images/g.png"></ImageBrush>
                 </Grid.Background>
             </Grid>
-        </DockPanel>
 
-    </Grid>
 </UserControl>

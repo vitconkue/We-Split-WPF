@@ -19,13 +19,14 @@ namespace We_Split_WPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindowViewModel : Window
     {
-        public MainWindow()
+        public MainWindowViewModel()
         {
             InitializeComponent();
             DataContext = new MainViewModel();
         }
 
+        public SearchPageViewModel SelectedViewModel { get; internal set; }
     }
 }

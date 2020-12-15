@@ -18,21 +18,13 @@ namespace We_Split_WPF.View
     /// <summary>
     /// Interaction logic for IntroductionPage.xaml
     /// </summary>
-    public partial class IntroductionPage : Page
+    public partial class IntroductionPage : UserControl
     {
         public IntroductionPage()
         {
             InitializeComponent();
         }
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void LocationButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
     }
 }
