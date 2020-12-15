@@ -22,7 +22,7 @@ namespace We_Split_WPF.Command
         public void Execute(object parameter)
         {
         
-            ViewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(parameter));
+            ViewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(parameter.ToString()));
         }
         public UpdateHomeViewCommand(MainViewModel viewModel)
         {

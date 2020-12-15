@@ -14,6 +14,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
+              d:DesignHeight="750" d:DesignWidth="1350"
       >
 
     <UserControl.Resources>
@@ -101,7 +102,6 @@
                     <Grid>
 
 
-                        <Border Style="{DynamicResource StackBorder}" >
                             <Grid>
                                 <ListView ItemsSource="{Binding Trips}" Name="TripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                     <ListView.ItemsPanel>
@@ -115,27 +115,29 @@
                                                 <materialDesign:TransitioningContent.OpeningEffects>
                                                     <materialDesign:TransitionEffect  Kind="SlideInFromRight"/>
                                                 </materialDesign:TransitioningContent.OpeningEffects>
-                                                <StackPanel>
-                                                    <Border Width="250" Height="200">
-                                                        <Border.Background >
-                                                            <ImageBrush  ImageSource="{Binding ImageLink}"></ImageBrush>
-                                                        </Border.Background>
-                                                    </Border>
-                                                    <StackPanel  Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
+                                    <Border BorderThickness="0.6" BorderBrush="#0099FF" CornerRadius="6">
+                                        <StackPanel>
+                                            <Border Width="250" Height="200">
+                                                <Border.Background >
+                                                    <ImageBrush  ImageSource="{Binding ImageLink}"></ImageBrush>
+                                                </Border.Background>
+                                            </Border>
+                                            <StackPanel  Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
 
-                                                        <TextBlock  FontSize="15" Margin="0 10 10 0" Text="{Binding Name}"></TextBlock>
+                                                <TextBlock  FontSize="15" Margin="0 10 10 0" Text="{Binding Name}"></TextBlock>
 
-                                                        <Button Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}"  Margin="10 0 0 0">Xem chi tiết</Button>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </materialDesign:TransitioningContent>
+                                                <Button Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}"  Margin="10 0 0 0">Xem chi tiết</Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </materialDesign:TransitioningContent>
 
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
 
                                 </ListView>
                             </Grid>
-                        </Border>
+                      
 
 
                     </Grid>

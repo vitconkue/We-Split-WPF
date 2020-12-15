@@ -13,6 +13,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
+               d:DesignHeight="750" d:DesignWidth="1350"
      >
 
     <UserControl.Resources>
@@ -74,50 +75,51 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+              
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <materialDesign:Card Margin ="10" Grid.Row="0">
+                    <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="10*"></RowDefinition>
 
                         </Grid.RowDefinitions>
-                        <TextBlock Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0" Padding="0 15" Height="30">VỊNH HẠ LONG</TextBlock>
+                        <TextBlock Text="{Binding Trip.Name}" Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0" Padding="0 15" Height="30"></TextBlock>
                         <StackPanel Width="400" Grid.Row="1">
-                            <Image Source="../Data/Images/200944.jpg" Width="400">
+                            <Image Source="{Binding Trip.ImageLink}" Width="400">
 
                             </Image>
                         </StackPanel>
 
                     </Grid>
-                    <Grid Grid.Row="1">
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="10" Grid.Row="1">
+                    <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="10*"></RowDefinition>
 
                         </Grid.RowDefinitions>
-                        <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0">THÀNH VIÊN</TextBlock>
+                        <TextBlock Padding="0 10"   Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0">THÀNH VIÊN</TextBlock>
                         <Grid Margin="0 0 0 10" Background="White" Width="400" Grid.Row="1">
-                            <DataGrid>
+                            <DataGrid IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn  Header="HỌ VÀ TÊN">
+                                    <DataGridTextColumn Header="STT" Binding="{Binding ID}" />
 
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="SĐT">
+                                    <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
 
-                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="SÔ TIỀN ĐÃ ĐÓNG" Binding="{Binding MoneyPaid }" />
 
-                                    <DataGridTextColumn Header="SỐ TIỀN ĐÃ ĐÓNG">
-
-                                    </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
 
                         </Grid>
                     </Grid>
+                    </materialDesign:Card>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -126,7 +128,8 @@
                         </RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <materialDesign:Card Margin="10"  Grid.Row="0">
+                    <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="10*"></RowDefinition>
@@ -147,7 +150,7 @@
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
-                                    <RowDefinition Height="10*"></RowDefinition>
+                                    <RowDefinition Height="7*"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBlock HorizontalAlignment="Center" Padding="0 10" Grid.Row="0">ĐẢO TUẦN CHÂU</TextBlock>
@@ -167,26 +170,12 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="709*"/>
-                            <ColumnDefinition Width="191*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition Height="10*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Padding="0 10" Grid.Row="0" Margin="416,0,224.4,0">THỐNG KÊ</TextBlock>
-                        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0.4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0">
-                                <Image Source="../Data/Images/pie.png" Height="178" Margin="0,0,0,140.4" Width="371"/>
-                            </StackPanel>
-                        </Grid>
+                        </materialDesign:Card>
+                    <materialDesign:Card Grid.Row="1" Margin="10">
+                    <Grid >
+                        
                     </Grid>
+                    </materialDesign:Card>
                 </Grid>
 
                 <Grid.Background>
