@@ -75,11 +75,15 @@
     </ApplicationDefinition>
     <Compile Include="Command\UpdateHomeViewCommand.cs" />
     <Compile Include="Command\UpdateMainViewCommand.cs" />
+    <Compile Include="Command\UpdateTripCommand.cs" />
+    <Compile Include="Converter\CommandParameterConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DetailPageViewModel.cs" />
+    <Compile Include="ViewModel\get.cs" />
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SearchPageViewModel.cs" />
+    <Compile Include="ViewModel\UpdatePageViewModel.cs" />
     <Compile Include="View\AddNewTripPage.xaml.cs">
       <DependentUpon>AddNewTripPage.xaml</DependentUpon>
     </Compile>

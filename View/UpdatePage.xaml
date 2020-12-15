@@ -84,12 +84,12 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <materialDesign:Card Grid.Row="0">
+                    <materialDesign:Card Grid.Row="0" Margin="10">
                     <Grid  ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="350" Margin="0,0,0.2,0.4" VerticalAlignment="Bottom">
                         <ScrollViewer>
                         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
 
-                            <StackPanel Margin="0 0 0 20" Height="30" HorizontalAlignment="Center">
+                            <StackPanel Margin="0 0 0 20"  HorizontalAlignment="Center">
                                     <TextBlock FontWeight="Heavy" Height="23">THÀNH VIÊN</TextBlock>
                             </StackPanel>
                             <StackPanel Margin="0 0 0 10">
@@ -122,11 +122,12 @@
                         </ScrollViewer>
                     </Grid>
                     </materialDesign:Card>
-                    <Grid Grid.Row="1">
+                    <materialDesign:Card Grid.Row="1" Margin="10">
+                    <Grid >
                         <ScrollViewer>
                             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
 
-                                <TextBlock Height="30" Padding="10" HorizontalAlignment="Center" FontWeight="Heavy">THÊM KHOẢN CHI</TextBlock>
+                                <TextBlock Padding="10" HorizontalAlignment="Center" FontWeight="Heavy">THÊM KHOẢN CHI</TextBlock>
                                 <StackPanel Orientation="Vertical" Margin="10">
                                 <ComboBox materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" Style="{DynamicResource MaterialDesignFloatingHintComboBox}" Width="250">
                                     <ComboBoxItem IsSelected="True">
@@ -146,6 +147,7 @@
                         </ScrollViewer>
 
                     </Grid>
+                    </materialDesign:Card>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -159,8 +161,10 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="10*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Padding="5 " Grid.Row="0">THÊM LỘ TRÌNH</TextBlock>
-                        <Grid Grid.Row="1">
+                        
+                       <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Padding="10 " Grid.Row="0">THÊM LỘ TRÌNH</TextBlock>
+                        <materialDesign:Card Grid.Row="1" Margin="10">
+                        <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition>
 
@@ -169,6 +173,7 @@
 
                                 </ColumnDefinition>
                             </Grid.ColumnDefinitions>
+                         
                             <Grid Grid.Column="0">
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Width="250" Margin="0 20 0 0" Orientation="Vertical">
@@ -198,8 +203,10 @@
                                 </StackPanel>
                             </Grid>
                         </Grid>
+                        </materialDesign:Card>
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <materialDesign:Card Grid.Row="1">
+                    <Grid >
                         <ScrollViewer>
                             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
 
@@ -209,6 +216,7 @@
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
+                    </materialDesign:Card>
                 </Grid>
                 
 

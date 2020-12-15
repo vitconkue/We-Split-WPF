@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +8,8 @@ using We_Split_WPF.ViewModel;
 
 namespace We_Split_WPF.Command
 {
-    public class UpdateHomeViewCommand : ICommand
+    public class UpdateTripCommand:ICommand
     {
-
         private MainViewModel viewModel;
         public event EventHandler CanExecuteChanged;
         public bool CanExecute(object parameter)
@@ -21,13 +19,14 @@ namespace We_Split_WPF.Command
 
         public void Execute(object parameter)
         {
-        
-            viewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(parameter.ToString()),viewModel);
+            if (parameter.ToString() == "Update")
+            {
+                viewModel.SelectedViewModel = new UpdatePageViewModel();
+            }
         }
-        public UpdateHomeViewCommand(MainViewModel param)
+        public UpdateTripCommand(MainViewModel param)
         {
             this.viewModel = param;
         }
-        
     }
 }
