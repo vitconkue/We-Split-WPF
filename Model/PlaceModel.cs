@@ -19,9 +19,6 @@ namespace We_Split_WPF.Model
         public string DateStart { get; set;  }
 
         public string DateFinish { get; set;  }
-
-        
-
-        
+      
     }
 }
