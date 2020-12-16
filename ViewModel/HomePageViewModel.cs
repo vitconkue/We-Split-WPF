@@ -38,7 +38,7 @@ namespace We_Split_WPF.ViewModel
             OnPropertyChanged("PagingVar");
 
             TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage, PagingVar.TripPerPage);
-            //OnPropertyChanged("TripsToShow"); 
+            OnPropertyChanged("TripsToShow"); 
         }
         public void GoToPreviousPage()
         {
