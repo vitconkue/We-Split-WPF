@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,8 @@ namespace We_Split_WPF.ViewModel
 
         public List<ExpenseModel> expensesList { get; set; } = new List<ExpenseModel>();
 
-        private List<PlaceModel> _placeList;
-        public List<PlaceModel> PlaceList
+        private ObservableCollection<PlaceModel> _placeList;
+        public ObservableCollection<PlaceModel> PlaceList
         {
             get
             {
@@ -37,7 +38,7 @@ namespace We_Split_WPF.ViewModel
         {
             allMember = DatabaseAccess.LoadAllMember();
             addPlaceButtonCommand = new RelayCommand(o => addPlaceButtonClick());
-            PlaceList = new List<PlaceModel>();
+            PlaceList = new ObservableCollection<PlaceModel>();
             PlaceModel temp = new PlaceModel();
             temp.Name = "Xyz";
             temp.Information = "Dz";
@@ -50,10 +51,11 @@ namespace We_Split_WPF.ViewModel
         {
             MessageBox.Show("Button clicked");
             PlaceModel temp = new PlaceModel();
-            temp.Name = "Xyz";
-            temp.Information = "Dz";
-            temp.DateStart = "11/11/2011";
-            temp.DateFinish = "12/12/2012";
+
+            temp.Name = "an";
+            temp.Information = "D";
+            temp.DateStart = "1/11/2011";
+            temp.DateFinish = "12/1/2012";
             PlaceList.Add(temp);
             OnPropertyChanged(nameof(PlaceList));
         }

@@ -89,7 +89,7 @@
 										</StackPanel>
 										<Button Command="{Binding addPlaceButtonCommand}" x:Name="AddPlaceButton"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM"/>
 										<Grid Margin="10">
-											<DataGrid IsReadOnly="True" ItemsSource="{Binding Path= PlaceList, Mode=OneTime, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" x:Name="PlaceDataGrid" AutoGenerateColumns="False" Height="200">
+											<DataGrid IsReadOnly="True" ItemsSource="{Binding PlaceList, Mode=OneWay}" x:Name="PlaceDataGrid" AutoGenerateColumns="False" Height="200">
 												<DataGrid.Columns>
 													<DataGridTextColumn Width="150" Header="Điểm dừng chân" Binding="{Binding Name}"/>
 													<DataGridTextColumn Width="150" Header="Mô tả" Binding="{Binding Information}"/>

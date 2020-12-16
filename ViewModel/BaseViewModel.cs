@@ -14,7 +14,10 @@ namespace We_Split_WPF.ViewModel
 
             protected void OnPropertyChanged(string propertyName)
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
             }
         }
     
