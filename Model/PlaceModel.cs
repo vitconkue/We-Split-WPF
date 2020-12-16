@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+
 namespace We_Split_WPF.Model
 {
     public class PlaceModel
@@ -19,6 +23,6 @@ namespace We_Split_WPF.Model
         public string DateStart { get; set;  }
 
         public string DateFinish { get; set;  }
-      
+
     }
 }
