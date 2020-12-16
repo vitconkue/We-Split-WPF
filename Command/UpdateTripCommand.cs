@@ -12,6 +12,7 @@ namespace We_Split_WPF.Command
     {
         private MainViewModel viewModel;
         public event EventHandler CanExecuteChanged;
+        private int id;
         public bool CanExecute(object parameter)
         {
             return true;
@@ -21,12 +22,13 @@ namespace We_Split_WPF.Command
         {
             if (parameter.ToString() == "Update")
             {
-                viewModel.SelectedViewModel = new UpdatePageViewModel();
+                viewModel.SelectedViewModel = new UpdatePageViewModel(id,viewModel);
             }
         }
-        public UpdateTripCommand(MainViewModel param)
+        public UpdateTripCommand(MainViewModel param,int ID)
         {
             this.viewModel = param;
+            this.id = ID;
         }
     }
 }

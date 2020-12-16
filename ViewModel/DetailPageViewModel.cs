@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using We_Split_WPF.Command;
 using We_Split_WPF.Model;
 namespace We_Split_WPF.ViewModel
 {
@@ -17,6 +18,7 @@ namespace We_Split_WPF.ViewModel
             Trip = DatabaseAccess.LoadSingleTrip(ID);
             Trip.Name = Trip.Name.ToUpper();
             this.viewModel = param;
+            UpdateTrip = new UpdateTripCommand(viewModel,ID);
         }
     }
 }

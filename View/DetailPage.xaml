@@ -61,8 +61,14 @@
         </Style>
         <Style x:Key="Title" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Heavy"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}"></Setter>
+            <Setter Property="FontSize" Value="22">
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
-        <converter:CommandParameterConverter x:Key="CommandParameterConverter"></converter:CommandParameterConverter>
+        <converter:CommandParameterConverter x:Key="CPC"></converter:CommandParameterConverter>
     </UserControl.Resources>
 
 
@@ -87,10 +93,12 @@
                                 <TextBlock VerticalAlignment="Center">KẾT THÚC</TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button Command="{Binding UpdateTrip}" CommandParameter="{Binding Trip.ID}"   Margin="0 0 10 0">
+                        <Button Command="{Binding UpdateTrip}" CommandParameter="Update"  Margin="0 0 10 0">
+                            
+                            
                             <StackPanel>
                                 <materialDesign:PackIcon Margin="0 0 10 0"  Kind="Update"></materialDesign:PackIcon>
-                            <TextBlock VerticalAlignment="Center">CẬP NHẬT</TextBlock>
+                            <TextBlock x:Name="Update" VerticalAlignment="Center">CẬP NHẬT</TextBlock>
                             </StackPanel>
                         </Button>
                        
@@ -107,14 +115,14 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <materialDesign:Card Margin ="10" Grid.Row="0">
+                        <materialDesign:Card Margin ="50 0 0 0" Grid.Row="0">
                             <Grid >
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
                                     <RowDefinition Height="10*"></RowDefinition>
 
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Trip.Name}" Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0" Padding="0 15" Height="30"></TextBlock>
+                                <TextBlock Text="{Binding Trip.Name}" Style="{DynamicResource Title}" ></TextBlock>
                                 <StackPanel Width="400" Grid.Row="1">
                                     <Image Source="{Binding Trip.ImageLink}" Width="400">
 
@@ -123,15 +131,15 @@
 
                             </Grid>
                         </materialDesign:Card>
-                        <materialDesign:Card Margin="10" Grid.Row="1">
+                        <materialDesign:Card Margin="50 10 0 10" Grid.Row="1">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
                                     <RowDefinition Height="10*"></RowDefinition>
 
                                 </Grid.RowDefinitions>
-                                <TextBlock Padding="0 10"   Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0">THÀNH VIÊN</TextBlock>
-                                <Grid Margin="0 0 0 10" Background="White" Width="400" Grid.Row="1">
+                                <TextBlock    Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0">THÀNH VIÊN</TextBlock>
+                                <Grid  Background="White" Grid.Row="1">
                                     <DataGrid IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="STT" Binding="{Binding ID}" />
@@ -158,7 +166,7 @@
                             </RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <materialDesign:Card Margin="50,10,50,9.6"  Grid.Row="0" Grid.ColumnSpan="2">
+                        <materialDesign:Card Margin="50 0 50 0" Grid.Row="0" Grid.ColumnSpan="2">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
@@ -203,7 +211,7 @@
                         </materialDesign:Card>
                         <materialDesign:Card Grid.Row="1" Margin="50,10.4" Grid.ColumnSpan="2">
                             <Grid >
-
+                               
                             </Grid>
                         </materialDesign:Card>
                     </Grid>
