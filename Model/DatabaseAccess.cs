@@ -215,5 +215,32 @@ namespace We_Split_WPF.Model
 
 
         }
+
+        #region Paging opration
+
+        // Get current total trip 
+        public static int GetTotalTripCount()
+        {
+            int result = 0; 
+            using (var cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string sqlString = "SELECT COUNT(ID) FROM TRIP";
+                result = cnn.QueryFirst<int>(sqlString, new DynamicParameters()); 
+            }
+            return result; 
+        }
+
+        // Get trips with page info
+        public static List<TripModel> GetTripWithPageInfo(int pageNumber, int numberOfTripPerPage)
+        {
+            List<TripModel> result = new List<TripModel>();
+            List<TripModel> allTrips = LoadAllTrips();
+
+            result = allTrips.Skip((pageNumber - 1) * numberOfTripPerPage).Take(numberOfTripPerPage).ToList();
+            return result; 
+        }
+        
+
+        #endregion
     }
 }
