@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using We_Split_WPF.Model;
-using Dapper; 
+using Dapper;
+using We_Split_WPF.Helper;
+
 
 namespace We_Split_WPF.Model
 {
@@ -180,6 +182,38 @@ namespace We_Split_WPF.Model
             }
             return currrentPlaceNumber + 1; 
         }
+        // Search with keyword (name only) 
+        public static List<TripModel> SearchKeyword(string searchKey)
+        {
+            List<TripModel> result = new List<TripModel>();
 
+            Dictionary<int, string> IdNamePairs = new Dictionary<int, string>();
+
+            using (var cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                // Load ID- name pair
+                string IdNamePairSQLString = "SELECT ID,Name FROM TRIP";
+                var outputPair = cnn.Query(IdNamePairSQLString, new DynamicParameters())
+                    .ToDictionary(row => (int)row.ID, row => (string)row.Name);
+
+                IdNamePairs = outputPair;
+            }
+            //search in the pair 
+            var filtered = IdNamePairs
+                .Where(r => r.Value.ToLower().Contains(searchKey.ToLower()) ||
+                    HelperFunctions.RemovedUTF(r.Value.ToLower()).Contains(HelperFunctions.RemovedUTF(searchKey.ToLower())))
+                .ToDictionary(r => r.Key, r => r.Value);
+
+            filtered.OrderByDescending(r => HelperFunctions.rateSearchResult(searchKey, r.Value));
+            // Load the trips
+            foreach (var keyValuePair in filtered)
+            {
+                result.Add(LoadSingleTrip(keyValuePair.Key));
+            }
+
+            return result;
+
+
+        }
     }
 }
