@@ -17,12 +17,15 @@ namespace We_Split_WPF.ViewModel
         public MainViewModel MainViewModel;
         public List<TripModel> Trips { get; set; }
         public ICommand UpdateHomeView { get; set; }
+
+        public ICommand UpdateTripFromHome { get; set; }
         public HomePageViewModel(MainViewModel param)
         {
             Trips = DatabaseAccess.LoadAllTrips();
             Debug.WriteLine(Trips[0].ImageLink);
             MainViewModel = param;
             UpdateHomeView = new UpdateHomeViewCommand(MainViewModel);
+            UpdateTripFromHome = new UpdateTripFromHomeCommand(MainViewModel);
         }
 
     }

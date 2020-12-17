@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:We_Split_WPF.View"
+      xmlns:converter="clr-namespace:We_Split_WPF.Converter"
       mc:Ignorable="d" 
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -27,6 +28,7 @@
             <Setter Property="Padding" Value="5"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
         <Style TargetType="StackPanel">
             <Setter Property="Orientation" Value="Horizontal"></Setter>
@@ -72,8 +74,27 @@
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="TextWrapping" Value="WrapWithOverflow"></Setter>
         </Style>
+        <converter:CommandParameterConverter x:Key="CPC"></converter:CommandParameterConverter>
     </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="15*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel HorizontalAlignment="Right">
+                <Button Command="{Binding UpdateTrip}" CommandParameter="Update" Margin=" 0 0 20 0">
+
+
+                    <StackPanel>
+                        <materialDesign:PackIcon Margin="0 0 10 0"  Kind="Check"></materialDesign:PackIcon>
+                        <TextBlock x:Name="Update" VerticalAlignment="Center">LƯU</TextBlock>
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
 
 
         <materialDesign:TransitioningContent>
@@ -81,16 +102,16 @@
                 <materialDesign:TransitionEffect Kind="SlideInFromRight"></materialDesign:TransitionEffect>
             </materialDesign:TransitioningContent.OpeningEffects>
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <materialDesign:Card Grid.Row="0" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:Card Grid.Column="0" Margin="10 0 10 10">
                         <Grid  ScrollViewer.HorizontalScrollBarVisibility="Auto">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -98,98 +119,136 @@
                             </Grid.RowDefinitions>
                             <TextBlock Style="{DynamicResource Title}">THÀNH VIÊN</TextBlock>
                             <ScrollViewer Grid.Row="1">
+                                    <DataGrid Background="White" IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
+                                        <DataGrid.Columns>
 
 
+                                            <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
 
+                                            <DataGridTextColumn Header="SÔ TIỀN ĐÃ ĐÓNG" Binding="{Binding MoneyPaid }" />
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button Command="{Binding DataContext.AddMoneyForMemmber, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="Đóng thêm">
+                     
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox x:Name="Money"  materialDesign:HintAssist.Hint="Số tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
 
-                            </ScrollViewer>
+                                    </DataGrid>
+                                </ScrollViewer>
                         </Grid>
                     </materialDesign:Card>
-                    <materialDesign:Card Grid.Row="1" Margin="10">
-                        <Grid >
-                            <ScrollViewer>
-                                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                        <materialDesign:Card Margin="10 0 10 10"  Grid.Column="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="10*"></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                                    <TextBlock Style="{DynamicResource Title}">THÊM KHOẢN CHI</TextBlock>
-                                    <StackPanel Orientation="Vertical" Margin="10">
-                                        <TextBox  materialDesign:HintAssist.Hint="Chi cho" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360" Margin="20"></TextBox>
-                                        <TextBox  materialDesign:HintAssist.Hint="Số tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360" Margin="20"></TextBox>
-                                    </StackPanel>
-                                    <Button Margin="0 10 0 0" Width="100">THÊM</Button>
-                                </StackPanel>
-                            </ScrollViewer>
+                                <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Padding="10 " Grid.Row="0">THÊM LỘ TRÌNH</TextBlock>
 
-                        </Grid>
-                    </materialDesign:Card>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition>
+                                <Grid Grid.Row="1" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition>
 
-                        </RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <materialDesign:Card Margin="10"  Grid.Row="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="10*"></RowDefinition>
-                            </Grid.RowDefinitions>
+                                        </ColumnDefinition>
+                                        <ColumnDefinition Width="1.5*">
 
-                            <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Padding="10 " Grid.Row="0">THÊM LỘ TRÌNH</TextBlock>
+                                        </ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
 
-                            <Grid Grid.Row="1" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition>
-
-                                    </ColumnDefinition>
-                                    <ColumnDefinition>
-
-                                    </ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-
-                                <Grid Grid.Column="0">
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel Width="250" Margin="0 20 0 0" Orientation="Vertical">
-                                            <TextBox  materialDesign:HintAssist.Hint="Chi cho" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360"></TextBox>
+                                    <Grid Grid.Column="0">
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Width="250" Margin="0 20 0 0" Orientation="Vertical">
+                                                <TextBox  materialDesign:HintAssist.Hint="Tên lộ trình" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360"></TextBox>
+                                            </StackPanel>
+                                            <StackPanel Margin="0 10 0 10"  Width="250" Orientation="Vertical">
+                                                <DatePicker Margin="0 0 0 10" x:Name="placeDateStart"  materialDesign:HintAssist.Hint="Ngày khởi hành" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                                                <DatePicker x:Name="placeDateFinish" materialDesign:HintAssist.Hint="Ngày kết thúc" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                            </StackPanel>
+                                            <StackPanel   Width="250" Orientation="Vertical">
+                                                <TextBox  materialDesign:HintAssist.Hint="Thông tin" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Height="130"></TextBox>
+                                            </StackPanel>
                                         </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="10*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">LỘ TRÌNH HIỆN TẠI</TextBlock>
+                                        <DataGrid  Grid.Row="1" Background="White" IsReadOnly="True" ItemsSource="{Binding Trip.placeList}" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
 
-                                        <StackPanel Width="250" Margin="0 20 0 20" Orientation="Vertical">
-                                            <TextBlock>Ngày đi</TextBlock>
-                                            <DatePicker></DatePicker>
-                                        </StackPanel>
-                                        <StackPanel  Width="250" Orientation="Vertical">
-                                            <TextBlock>Ngày kết thúc</TextBlock>
-                                            <DatePicker></DatePicker>
-                                        </StackPanel>
-                                        <StackPanel Margin="0 20 0 0"  Width="250" Orientation="Vertical">
-                                            <TextBlock>Thông tin</TextBlock>
-                                            <TextBox Height="80" Style="{DynamicResource MaterialDesignTextBox}" Width="250"  FontSize="14"></TextBox>
-                                        </StackPanel>
-                                    </StackPanel>
+
+                                                <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
+
+                                                <DataGridTextColumn Header="THÔNG TIN" Binding="{Binding Information }" >
+
+                                                </DataGridTextColumn>
+
+                                                <DataGridTextColumn Header="NGÀY BẮT ĐẦU " Binding="{ Binding DateStart}"/>
+                                                <DataGridTextColumn Header="NGÀY KẾT THÚC" Binding="{ Binding DateFinish}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
                                 </Grid>
-                                <Grid Grid.Column="1">
-                                    <StackPanel Orientation="Vertical">
-                                        <Image Height="270"></Image>
-                                        <Button HorizontalContentAlignment="Center" Width="60">
-                                            <materialDesign:PackIcon Kind="ImageAdd"></materialDesign:PackIcon>
+
+                            </Grid>
+                        </materialDesign:Card>
+                     
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+
+                        </ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                        <materialDesign:Card Grid.Column="0" Margin=" 10">
+                            <Grid >
+                                <ScrollViewer>
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+
+                                        <TextBlock Style="{DynamicResource Title}">THÊM KHOẢN CHI</TextBlock>
+                                        <StackPanel Orientation="Vertical" Margin="10">
+                                            <TextBox x:Name="ExpenseName"  materialDesign:HintAssist.Hint="Chi cho" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360" Margin="20"></TextBox>
+                                            <TextBox x:Name="ExpenseMoney"  materialDesign:HintAssist.Hint="Số tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360" Margin="20"></TextBox>
+                                        </StackPanel>
+                                        <Button Command="{Binding AddExpense}" Margin="0 10 0 0" Width="100" Content="THÊM">
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource CPC}">
+                                                    <Binding Path="Text" ElementName="ExpenseName" />
+
+                                                    <Binding Path="Text" ElementName="ExpenseMoney" />
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
                                         </Button>
                                     </StackPanel>
-                                </Grid>
-                            </Grid>
+                                </ScrollViewer>
 
-                        </Grid>
-                    </materialDesign:Card>
-                    <materialDesign:Card Margin="10" Grid.Row="1">
+                            </Grid>
+                        </materialDesign:Card>
+                        <materialDesign:Card Margin="10" Grid.Column="1">
                         <Grid>
                             <ScrollViewer>
                                 <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
 
                                     <TextBlock Style="{DynamicResource Title}">CÁC KHOẢN CHI HIỆN TẠI</TextBlock>
                                     <StackPanel Orientation="Vertical" Margin="10">
-                                        <DataGrid Style="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" ItemsSource="{Binding Expenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+                                        <DataGrid Style="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" ItemsSource="{Binding Expenses, Mode=TwoWay}" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="STT" Binding="{Binding ID}" />
+                                              
 
                                                 <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
 
@@ -202,7 +261,7 @@
                                 </StackPanel>
                             </ScrollViewer>
 
-                            <Button Click="{Binding test}">Test</Button>
+                           
                         </Grid>
                     </materialDesign:Card>
                 </Grid>
@@ -215,5 +274,6 @@
         </materialDesign:TransitioningContent>
 
 
+    </Grid>
     </Grid>
 </UserControl>
