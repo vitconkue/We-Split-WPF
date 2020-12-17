@@ -75,17 +75,17 @@
 									<StackPanel Orientation="Vertical" VerticalAlignment="Center">
 										<StackPanel Orientation="Vertical" Margin="20">
 											<TextBlock Style="{DynamicResource SidebarText}" FontSize="26" FontWeight="ExtraBlack" Foreground="{DynamicResource PrimaryHueDarkBrush}" >CHUYẾN ĐI</TextBlock>
-											<TextBox materialDesign:HintAssist.Hint="Tên chuyến đi" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="18" Width="400" Margin="20"></TextBox>
+											<TextBox Text="{Binding TripName}"  materialDesign:HintAssist.Hint="Tên chuyến đi" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="18" Width="400" Margin="20"></TextBox>
 										</StackPanel>
 
 										<TextBlock Style="{DynamicResource SidebarText}" FontSize="26" FontWeight="ExtraBlack" Foreground="{DynamicResource PrimaryHueDarkBrush}" >LỘ TRÌNH</TextBlock>
 										<StackPanel Orientation ="Horizontal">
-											<TextBox x:Name="placeName" materialDesign:HintAssist.Hint="Điểm dừng chân" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="260" Margin="20"></TextBox>
-											<TextBox x:Name="placeInfo" materialDesign:HintAssist.Hint="Mô tả" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="260" Margin="20"></TextBox>
+											<TextBox Text="{Binding PlaceNameData}"  x:Name="placeName" materialDesign:HintAssist.Hint="Điểm dừng chân" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="260" Margin="20"></TextBox>
+											<TextBox Text="{Binding PlaceInfoData}" x:Name="placeInfo" materialDesign:HintAssist.Hint="Mô tả" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="260" Margin="20"></TextBox>
 										</StackPanel>
 										<StackPanel Orientation ="Horizontal">
-											<DatePicker x:Name="placeDateStart" Width="260" materialDesign:HintAssist.Hint="Ngày khởi hành" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="20"/>
-											<DatePicker x:Name="placeDateFinish" Width="260" materialDesign:HintAssist.Hint="Ngày kết thúc" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="20"/>
+											<DatePicker SelectedDate="{Binding PlaceDSData}"  x:Name="placeDateStart" Width="260" materialDesign:HintAssist.Hint="Ngày khởi hành" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="20"/>
+											<DatePicker SelectedDate="{Binding PlaceDFData}"  x:Name="placeDateFinish" Width="260" materialDesign:HintAssist.Hint="Ngày kết thúc" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="20"/>
 										</StackPanel>
 										<Button Command="{Binding addPlaceButtonCommand}" x:Name="AddPlaceButton"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM"/>
 										<Grid Margin="10">
@@ -119,14 +119,15 @@
 									<TextBlock Style="{DynamicResource SidebarText}" FontSize="26" FontWeight="ExtraBlack" Foreground="{DynamicResource PrimaryHueDarkBrush}" >THÀNH VIÊN</TextBlock>
 									<StackPanel Orientation="Horizontal">
 										<StackPanel Orientation="Vertical" Margin="20">
-											<ComboBox x:Name="memberComboBox" ItemsSource="{Binding allMember}" SelectedItem="{Binding ID}" DisplayMemberPath="Name" materialDesign:HintAssist.Hint="Thành viên tham gia" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True">
+											<ComboBox Text="{Binding MemberNameData}"  x:Name="memberComboBox" ItemsSource="{Binding AllMember}" SelectedItem="{Binding ID}" DisplayMemberPath="Name" materialDesign:HintAssist.Hint="Thành viên tham gia" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True">
 												
 											</ComboBox>
-											<TextBox materialDesign:HintAssist.Hint="Sồ tiền đóng góp" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200" ></TextBox>
-											<Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
+											<TextBox Text="{Binding MemberMoneyData}" materialDesign:HintAssist.Hint="Sồ tiền đóng góp" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200" ></TextBox>
+											<Button Command="{Binding addMemberButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
+											
 										</StackPanel>
 										<Grid Margin="10">
-											<DataGrid IsReadOnly="True" ItemsSource="{Binding memberList}" Name="MemberDataGrid" AutoGenerateColumns="False" Width="300">
+											<DataGrid IsReadOnly="True" ItemsSource="{Binding MemberList}" Name="MemberDataGrid" AutoGenerateColumns="False" Height="160" Width="300" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Auto">
 												<DataGrid.Columns>
 													<DataGridTextColumn Width="180" Header="Thành viên" Binding="{Binding Name}"/>
 													<DataGridTextColumn Header="Số tiền" Binding="{Binding MoneyPaid}"/>
@@ -147,12 +148,12 @@
 									<TextBlock Style="{DynamicResource SidebarText}" FontSize="26" FontWeight="ExtraBlack" Foreground="{DynamicResource PrimaryHueDarkBrush}" >CHI TIÊU</TextBlock>
 									<StackPanel Orientation="Horizontal">
 										<StackPanel Orientation="Vertical" Margin="20">
-											<TextBox materialDesign:HintAssist.Hint="Nội dung" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
-											<TextBox materialDesign:HintAssist.Hint="Sồ tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
-											<Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
+											<TextBox Text="{Binding ExpensesNameData}" materialDesign:HintAssist.Hint="Nội dung" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
+											<TextBox Text="{Binding ExpensesMoneyData}" materialDesign:HintAssist.Hint="Sồ tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
+											<Button Command="{Binding addExpensesButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
 										</StackPanel>
 										<Grid Margin="10">
-											<DataGrid IsReadOnly="True" ItemsSource="{Binding expensesList}" Name="ExpenseDataGrid" AutoGenerateColumns="False" Width="300">
+											<DataGrid IsReadOnly="True" ItemsSource="{Binding ExpensesList}" Name="ExpenseDataGrid" AutoGenerateColumns="False" Height="180" Width="300" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Auto">
 												<DataGrid.Columns>
 													<DataGridTextColumn Width="180" Header="Nội dung" Binding="{Binding Name}"/>
 													<DataGridTextColumn Header="Số tiền" Binding="{Binding AmountMoney}"/>
@@ -168,7 +169,7 @@
 								</StackPanel>
 							</materialDesign:Card>
 							<Grid Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,100,30">
-								<Button Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Width="125" Height="45">
+								<Button Command="{Binding doneButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Width="125" Height="45">
 									<TextBlock Text="HOÀN THÀNH" />
 								</Button>
 							</Grid>
