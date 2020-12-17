@@ -78,7 +78,6 @@
     <Compile Include="Command\UpdateMainViewCommand.cs" />
     <Compile Include="ViewModel\AddNewTripPageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\ClickButtonViewModel.cs" />
     <Compile Include="ViewModel\DetailPageViewModel.cs" />
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

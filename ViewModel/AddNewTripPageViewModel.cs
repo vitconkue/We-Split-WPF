@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Input;
 using We_Split_WPF.Command;
 using We_Split_WPF.Model;
+using Microsoft.Win32;
+using System.IO;
 
 namespace We_Split_WPF.ViewModel
 {
@@ -75,6 +77,7 @@ namespace We_Split_WPF.ViewModel
         public ICommand addExpensesButtonCommand { get; set; }
 
         public ICommand doneButtonCommand { get; set; }
+        public ICommand addImageButtonCommand { get; set; }
         public MainViewModel MainViewModel;
 
         ///  Biến Binding
@@ -218,6 +221,20 @@ namespace We_Split_WPF.ViewModel
             }
         }
 
+        private string _imageSource;
+        public string ImageSource
+        {
+            get { return this._imageSource; }
+            set
+            {
+                if (this._imageSource != value)
+                {
+                    this._imageSource = value;
+                    this.OnPropertyChanged(nameof(_imageSource));
+                }
+            }
+        }
+
         /// 
         public AddNewTripPageViewModel()
         {
@@ -231,6 +248,7 @@ namespace We_Split_WPF.ViewModel
             addMemberButtonCommand = new RelayCommand(o => addMemberButtonClick());
             addExpensesButtonCommand = new RelayCommand(o => addExpensesButtonClick());
             doneButtonCommand = new RelayCommand(o => doneButtonClick());
+            addImageButtonCommand = new RelayCommand(o => addImageButtonClick());
             PlaceList = new ObservableCollection<PlaceModel>();
             MemberList = new ObservableCollection<MemberInTripModel>();
             ExpensesList = new ObservableCollection<ExpenseModel>();
@@ -328,6 +346,17 @@ namespace We_Split_WPF.ViewModel
         private void doneButtonClick()
         {
             
+        }
+
+        private void addImageButtonClick()
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                File.ReadAllText(openFileDialog.FileName);
+                ImageSource = openFileDialog.FileName;
+            }
+            OnPropertyChanged(nameof(ImageSource));
         }
     }
 

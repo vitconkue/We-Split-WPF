@@ -21,14 +21,8 @@ namespace We_Split_WPF.Command
 
         public void Execute(object parameter)
         {
-            if (parameter.ToString() == "AddNewTripPage")
-            {
-                ViewModel.SelectedViewModel = new AddNewTripPageViewModel();
-            }
-            else
-            {
-                ViewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(parameter.ToString()));
-            }
+
+            ViewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(parameter.ToString()));
         }
         public UpdateHomeViewCommand(MainViewModel viewModel)
         {
