@@ -18,7 +18,21 @@ namespace We_Split_WPF.ViewModel
         public ICommand UpdateTrip { get; set; }
         public ICommand AddMoneyForMemmber { get; set; }
         public ICommand AddExpense { get; set; }
-        private string _currentMoney = "123";
+        public ICommand AddPlace { get; set; }
+        private string _currentMoney = "";
+        private string _moneyReceived;
+        public string MoneyReceived
+        {
+            get
+            {
+                return _moneyReceived;
+            }
+            set
+            {
+                _moneyReceived = value;
+                OnPropertyChanged(nameof(MoneyReceived));
+            }
+        }
         public string CurrentMoney
         {
             get
@@ -29,6 +43,19 @@ namespace We_Split_WPF.ViewModel
             {
                 _currentMoney = value;
                 OnPropertyChanged(nameof(CurrentMoney));
+            }
+        }
+        private ObservableCollection<PlaceModel> _placeList;
+        public ObservableCollection<PlaceModel> PlaceList
+        {
+            get
+            {
+                return _placeList; ;
+            }
+            set
+            {
+                _placeList = value;
+                OnPropertyChanged(nameof(PlaceList));
             }
         }
         private ObservableCollection<ExpenseModel> _expenses;
@@ -44,6 +71,19 @@ namespace We_Split_WPF.ViewModel
                 OnPropertyChanged(nameof(Expenses));
             }
         }
+        private ObservableCollection<MemberInTripModel> _memeberList;
+        public ObservableCollection<MemberInTripModel> MemberList
+        {
+            get
+            {
+                return _memeberList;
+            }
+            set
+            {
+                _memeberList = value;
+                OnPropertyChanged(nameof(MemberList));
+            }
+        }
         public TripModel Trip { get; set; }
         public UpdatePageViewModel(int ID, MainViewModel param)
         {
@@ -51,14 +91,21 @@ namespace We_Split_WPF.ViewModel
             viewModel = param;
             Trip = DatabaseAccess.LoadSingleTrip(id);
             Expenses = new ObservableCollection<ExpenseModel>(Trip.expensesList);
+            PlaceList = new ObservableCollection<PlaceModel>(Trip.placeList);
             AddMoneyForMemmber = new RelayCommand(o => UpdateMemberMoney(o));
+            AddPlace = new RelayCommand(o => AddPlaceForTrip(o));
             AddExpense = new RelayCommand(o => AddExpenseForTrip(o));
+            MemberList = new ObservableCollection<MemberInTripModel>(Trip.memberList);
+            MoneyReceived = Trip.MoneyReceived.ToString();
         }
         public void UpdateMemberMoney(object o)
         {
-            var parameter = o;
-
-            var x = CurrentMoney;
+            var temp = (MemberInTripModel)o;
+            Trip.GetMoreMoneyFromMember(temp, int.Parse(CurrentMoney));
+            MemberList = new ObservableCollection<MemberInTripModel>(Trip.memberList);
+            OnPropertyChanged(nameof(MemberList));
+            MoneyReceived = Trip.MoneyReceived.ToString();
+            CurrentMoney = "";
         }
         public void AddExpenseForTrip(object o)
         {
@@ -72,6 +119,31 @@ namespace We_Split_WPF.ViewModel
                 OnPropertyChanged(nameof(Expenses));
                 Trip.AddExpense(temp);
             }
+        }
+        public void AddPlaceForTrip(object o)
+        {
+            var parameter = (object[])o;
+            List<string> Data = new List<string>();
+           
+            foreach (var x in parameter)
+            {
+                if (x.GetType().Equals(typeof(DateTime)))
+                {
+                    DateTime y = (DateTime)x;
+                    Data.Add(y.ToString("dd/MM/yyyy"));
+                }
+                else
+                    Data.Add(x.ToString());
+            }
+            PlaceModel temp = new PlaceModel();
+            temp.Name=Data[0];
+            temp.Information = Data[1];
+            temp.DateStart = Data[2];
+            temp.DateFinish = Data[3];
+            Trip.AddPlace(temp);
+            PlaceList.Add(temp);
+            OnPropertyChanged(nameof(Trip));
+          
         }
     }
 }

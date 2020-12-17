@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,18 @@ namespace We_Split_WPF.ViewModel
         public TripModel Trip { get; set; }
         private MainViewModel viewModel;
         public ICommand UpdateTrip { get; set; }
+        
         public DetailPageViewModel(int ID,MainViewModel param)
         {
             Trip = DatabaseAccess.LoadSingleTrip(ID);
             Trip.Name = Trip.Name.ToUpper();
             this.viewModel = param;
             UpdateTrip = new UpdateTripCommand(viewModel,ID);
-            
-            
+            string file = AppDomain.CurrentDomain.BaseDirectory;
+            string path = $"{file}Data\\Images\\TripsImage\\{ID}\\Location\\";
+            DirectoryInfo Folder = new DirectoryInfo(path);
+            var Images = Folder.GetFiles();
+   
         }
     }
 }

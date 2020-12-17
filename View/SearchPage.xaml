@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:We_Split_WPF.View"
+      xmlns:converter="clr-namespace:We_Split_WPF.Converter"
       mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -53,6 +54,7 @@
             <Setter Property="Background" Value="#ff7875"></Setter>
             <Setter Property="Margin" Value="10 0"></Setter>
         </Style>
+        <converter:CommandParameterConverter x:Key="CPC"></converter:CommandParameterConverter>
     </UserControl.Resources>
     <Grid>
 
@@ -66,19 +68,33 @@
             </Grid.Background>
             <StackPanel Width="600" Grid.Row="0">
                 <materialDesign:PackIcon Margin="0 0 10 0" Foreground="Black" Width="30" Kind="Search" Height="64"/>
-                <TextBox materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" FontSize="14" Height="30" Width="300"></TextBox>
-                <CheckBox Margin="10 0">
+                <TextBox x:Name="SearchInput"  materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" FontSize="14" Height="30" Width="300">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding Search}" Key="Return" >
+                            <KeyBinding.CommandParameter>
+                                <MultiBinding Converter="{StaticResource CPC}">
+                                    <Binding Path="Text" ElementName="SearchInput" />
+                                    <Binding Path="IsChecked" ElementName="TripName" />
+                                    <Binding Path="IsChecked" ElementName="MemberName" />
+                               
+                                </MultiBinding>
+                            </KeyBinding.CommandParameter>
+                        </KeyBinding>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <CheckBox IsChecked="True" Checked="TripName_Checked" x:Name="TripName">
+                    <CheckBox.Resources>
+
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#0099FF"/>
+                    </CheckBox.Resources> TÊN CHUYẾN ĐI
+                </CheckBox>
+                <CheckBox Checked="MemberName_Checked" x:Name="MemberName" Margin="10 0">
                     <CheckBox.Resources>
 
                         <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#0099FF"/>
                     </CheckBox.Resources> TÊN THÀNH VIÊN
                 </CheckBox>
-                <CheckBox>
-                    <CheckBox.Resources>
-
-                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#0099FF"/>
-                    </CheckBox.Resources> TÊN ĐỊA ĐIỂM
-                </CheckBox>
+               
             </StackPanel>
         </Grid>
     </Grid>

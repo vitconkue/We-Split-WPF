@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace We_Split_WPF.ViewModel
 {
-  
-        public class BaseViewModel : INotifyPropertyChanged
-        {
-            public event PropertyChangedEventHandler PropertyChanged;
 
-            protected void OnPropertyChanged(string propertyName)
+    public class BaseViewModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-    
+    }
+
 }
