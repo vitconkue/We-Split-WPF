@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using We_Split_WPF.Command;
 using We_Split_WPF.Model;
@@ -17,9 +18,22 @@ namespace We_Split_WPF.ViewModel
         private MainViewModel viewModel;
         public ICommand UpdateTrip { get; set; }
         public ICommand AddPlaceImage { get; set; }
+        public ICommand PrevClick { get; set; }
+        public ICommand NextClick { get; set; }
         private Uri _placeImageDisplay;
-        private string _currentPlaceImage = "1";
-        private string _totalPlaceImage;
+        private string _currentStringDisplay;
+        public string CurrentStringDisplay
+        {
+            get
+            {
+                return _currentStringDisplay;
+            }
+            set
+            {
+                _currentStringDisplay = value;
+                OnPropertyChanged(nameof(CurrentStringDisplay));
+            }
+        }
         public Uri PlaceImageDisplay
         {
             get
@@ -32,30 +46,8 @@ namespace We_Split_WPF.ViewModel
                 OnPropertyChanged(nameof(PlaceImageDisplay));
             }
         }
-        public string CurrentPlaceImage
-        {
-            get
-            {
-                return _currentPlaceImage;
-            }
-            set
-            {
-                _currentPlaceImage = value;
-                OnPropertyChanged(nameof(CurrentPlaceImage));
-            }
-        }
-        public string TotalPlaceImage
-        {
-            get
-            {
-                return _totalPlaceImage;
-            }
-            set
-            {
-                _totalPlaceImage = value;
-                OnPropertyChanged(nameof(TotalPlaceImage));
-            }
-        }
+        public int CurrentPlaceImage{get; set;}
+        public int TotalPlaceImage{ get; set;}
         public List<Uri> PlaceImages { get; set; }
         public DetailPageViewModel(int ID, MainViewModel param)
         {
@@ -64,10 +56,15 @@ namespace We_Split_WPF.ViewModel
             this.viewModel = param;
             UpdateTrip = new UpdateTripCommand(viewModel, ID);
             AddPlaceImage = new RelayCommand(o => AddPlaceImageForTrip());
+            PrevClick = new RelayCommand(o => PrevButtonClick());
+            NextClick = new RelayCommand(o => NextButtonClick());
             try
             {
                 PlaceImages = Trip.PlaceImages;
                 PlaceImageDisplay = PlaceImages[0];
+                TotalPlaceImage = PlaceImages.Count();
+                CurrentPlaceImage = 1;
+                CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
             }
             catch
             {
@@ -77,15 +74,76 @@ namespace We_Split_WPF.ViewModel
         }
         public void AddPlaceImageForTrip()
         {
+
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Chọn Ảnh";
             openFileDialog.Multiselect = true;
             openFileDialog.Filter = "Image files(*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-            if (openFileDialog.ShowDialog() == true)
+            string[] allImageSource = new string[] { };
+            try
             {
-                var allImages = openFileDialog.FileNames;
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    allImageSource = openFileDialog.FileNames;
+                }
+                string file = AppDomain.CurrentDomain.BaseDirectory;
+               
+                foreach (string source in allImageSource)
+                {
+                    var tokens1 = source.Split(new string[] { "\\" }, StringSplitOptions.None);
+                    string filename = tokens1[tokens1.Length - 1];
+                    string dest = $"{file}Data\\Images\\TripsImage\\{Trip.ID}\\Location\\";
+                    var tokens2 = filename.Split(new string[] { "." }, StringSplitOptions.None);
+                    string filetype= tokens2[tokens2.Length - 1];
+                    filename = $"image{PlaceImages.Count() + 1}.{filetype}";
+                    dest += filename;
+                    PlaceImages.Add(new Uri(dest));
+                    System.IO.File.Copy(source, dest, true);
+                }
+                PlaceImageDisplay = PlaceImages[0];
+                OnPropertyChanged(nameof(PlaceImageDisplay));
+                TotalPlaceImage = PlaceImages.Count();
+                CurrentPlaceImage = 1;
+                CurrentStringDisplay = $"1 OF {TotalPlaceImage}";
             }
-            
+            catch
+            {
+                
+            }
+        }
+        public void PrevButtonClick()
+        {
+            try
+            {
+                if (CurrentPlaceImage > 1)
+                {
+                    CurrentPlaceImage--;
+                    PlaceImageDisplay = PlaceImages[CurrentPlaceImage-1];
+                    CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
+                    OnPropertyChanged(nameof(PlaceImageDisplay));
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        public void NextButtonClick()
+        {
+            try
+            {
+                if (CurrentPlaceImage < TotalPlaceImage)
+                {
+                    PlaceImageDisplay = PlaceImages[CurrentPlaceImage];
+                    CurrentPlaceImage++;
+                    CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
+                    OnPropertyChanged(nameof(PlaceImageDisplay));
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }
