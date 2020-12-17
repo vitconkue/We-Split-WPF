@@ -89,6 +89,9 @@
                 <StackPanel Grid.Row="0">
                     <ComboBox materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" Margin="100 0 0 0" Style="{DynamicResource MaterialDesignFloatingHintComboBox}" Width="200">
                         <ComboBoxItem IsSelected="True">
+                            TẤT CẢ
+                         </ComboBoxItem>
+                        <ComboBoxItem>
                             ĐANG ĐI
                         </ComboBoxItem>
                         <ComboBoxItem>
@@ -102,8 +105,8 @@
                     <Grid>
 
 
-                            <Grid Margin="25 0 25 0">
-                                <ListView ItemsSource="{Binding Trips}" Name="TripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <Grid>
+                                <ListView ItemsSource="{Binding TripsToShow}" Name="TripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                     <ListView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel />
@@ -156,13 +159,22 @@
 
                 </Grid>
                 <StackPanel HorizontalAlignment="Center" Grid.Row="2">
-                    <Button  Height="35" >
+                    <Button Command="{Binding PreviousPage}" CommandParameter="{Binding PagingVar}"  Height="35" >
                         <materialDesign:PackIcon Kind="NavigateBefore"></materialDesign:PackIcon>
                     </Button>
                     <Border>
-                        <Button Height="35"  Margin="20 0 20 0">1 OF 3</Button>
+                <Button Height="35"  Margin="20 0 20 0">
+                    <Button.Content>
+                        <StackPanel>
+                            <TextBlock Text="{Binding PagingVar.CurrentPage}"></TextBlock>
+                            <TextBlock Text=" OF "></TextBlock>
+                            <TextBlock Text="{Binding PagingVar.TotalPages}"></TextBlock>
+                        </StackPanel>
+                        
+                    </Button.Content>
+                </Button>
                     </Border>
-                    <Button Height="35" >
+            <Button Command="{Binding NextPage}" CommandParameter="{Binding PagingVar}" Height="35" >
                         <materialDesign:PackIcon Kind="NavigateNext"></materialDesign:PackIcon>
                     </Button>
                 </StackPanel>
