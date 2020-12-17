@@ -28,6 +28,5 @@ namespace We_Split_WPF.Command
         {
             this.viewModel = param;
         }
-        
     }
 }

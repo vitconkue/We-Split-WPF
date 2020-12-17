@@ -98,7 +98,10 @@
                             ĐÃ ĐI
                         </ComboBoxItem>
                     </ComboBox>
-                </StackPanel>
+			<Button Margin="100,0,0,0" Command="{Binding addNewButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Width="125" Height="45">
+				<TextBlock Text="THÊM" />
+			</Button>
+		</StackPanel>
                 <Grid Grid.Row="1">
                 
                     

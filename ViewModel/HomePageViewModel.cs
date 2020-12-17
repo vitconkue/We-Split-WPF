@@ -50,10 +50,13 @@ namespace We_Split_WPF.ViewModel
         }
 
         public ICommand UpdateTripFromHome { get; set; }
-        public HomePageViewModel(MainViewModel param)
-        {
+        
             //TripsToShow = DatabaseAccess.LoadAllTrips();
             //Debug.WriteLine(TripsToShow[0].ImageLink);
+        public ICommand addNewButtonCommand { get; set; }
+        public HomePageViewModel(MainViewModel param)
+        {
+            addNewButtonCommand = new RelayCommand(o => addNewButtonClick());
             MainViewModel = param;
             UpdateHomeView = new UpdateHomeViewCommand(MainViewModel);
             tripPerPage = 1;
@@ -75,6 +78,9 @@ namespace We_Split_WPF.ViewModel
 
             UpdateTripFromHome = new UpdateTripFromHomeCommand(MainViewModel);
         }
-
+        public void addNewButtonClick()
+        {
+            MainViewModel.SelectedViewModel = new AddNewTripPageViewModel();
+        }
     }
 }

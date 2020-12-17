@@ -20,6 +20,14 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:UpdatePageViewModel}">
                 <views:UpdatePage/>
+			<DataTemplate DataType="{x:Type viewmodels:AddNewTripPageViewModel}">
+				<views:AddNewTripPage/>
+			</DataTemplate>
+			<!--<DataTemplate DataType="{x:Type viewmodels:SearchPageViewModel}">
+                <views:SearchPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SearchPageViewModel}">
+                <views:SearchPage/>
             </DataTemplate>
           
 

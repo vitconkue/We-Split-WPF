@@ -16,34 +16,13 @@ using System.Windows.Shapes;
 namespace We_Split_WPF.View
 {
     /// <summary>
-    /// Interaction logic for AddNewTripPage.xaml
+    /// Interaction logic for SearchPage.xaml
     /// </summary>
-    public partial class AddNewTripPage : Page
+    public partial class AddNewTripPage : UserControl
     {
         public AddNewTripPage()
         {
             InitializeComponent();
-        }
-
-
-        private void LocationButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.DetailPage());
-        }
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new View.HomePage());
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddPlaceButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
