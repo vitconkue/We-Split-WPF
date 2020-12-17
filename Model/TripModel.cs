@@ -165,7 +165,12 @@ namespace We_Split_WPF.Model
                 List<Uri> Temp = new List<Uri>();
                 string file = AppDomain.CurrentDomain.BaseDirectory;
                 string path = $"{file}Data\\Images\\TripsImage\\{ID}\\Location\\";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
                 DirectoryInfo Folder = new DirectoryInfo(path);
+                
                 var Images = Folder.GetFiles();
                 foreach(var image in Images)
                 {

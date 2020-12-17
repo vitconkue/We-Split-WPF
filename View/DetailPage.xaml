@@ -210,7 +210,7 @@
                                         </Grid.RowDefinitions>
                                         <StackPanel HorizontalAlignment="Center">
                                          <TextBlock FontWeight="Heavy" HorizontalAlignment="Center" Padding="0 10">ẢNH</TextBlock>
-                                            <Button Margin="10 0 0 0">
+                                            <Button Command="{Binding AddPlaceImage}" Margin="10 0 0 0">
                                                 <materialDesign:PackIcon Kind="ImageAdd"></materialDesign:PackIcon></Button>
                                         </StackPanel>
                                         <StackPanel Width="290" Grid.Row="1">
@@ -219,8 +219,11 @@
                                             </Image>
                                         </StackPanel>
                                         <StackPanel HorizontalAlignment="Center" Grid.Row="2">
-                                            <Button Margin="0 0 10 0" Height="25" >
+                                            <Button Height="25" >
                                                 <materialDesign:PackIcon Kind="NavigateBefore"></materialDesign:PackIcon>
+                                            </Button >
+                                            <Button Margin="10 0 10 0" Height="25">
+                                                <TextBlock  Margin="0 0 10 0" Text="{Binding CurrentStringDisplay}"></TextBlock>
                                             </Button>
                                             <Button Height="25" >
                                                 <materialDesign:PackIcon Kind="NavigateNext"></materialDesign:PackIcon>
