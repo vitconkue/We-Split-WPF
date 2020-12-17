@@ -214,7 +214,7 @@
                                                 <materialDesign:PackIcon Kind="ImageAdd"></materialDesign:PackIcon></Button>
                                         </StackPanel>
                                         <StackPanel Width="290" Grid.Row="1">
-                                            <Image Source="../Data/Images/island.jpg" Width="290">
+                                            <Image Source="{Binding PlaceImageDisplay}" Width="290">
 
                                             </Image>
                                         </StackPanel>
