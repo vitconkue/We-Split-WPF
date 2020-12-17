@@ -27,6 +27,7 @@ namespace We_Split_WPF.ViewModel
         public int tripPerPage { get; set;  }
       
 
+
         public void RecalculatePaging()
         {
             // recalcute with certain info: filter
@@ -55,7 +56,7 @@ namespace We_Split_WPF.ViewModel
             //Debug.WriteLine(TripsToShow[0].ImageLink);
             MainViewModel = param;
             UpdateHomeView = new UpdateHomeViewCommand(MainViewModel);
-            tripPerPage = 2;
+            tripPerPage = 1;
 
             NextPage = new NextPageHomeCommand(this);
             PreviousPage = new PreviousPageHomeCommand(this); 

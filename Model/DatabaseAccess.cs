@@ -19,6 +19,64 @@ namespace We_Split_WPF.Model
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
+        // Add an empty trip (without name only) into database and return TripModel
+        public static TripModel AddEmptyTrip(string tripName)
+        {
+            TripModel temp = new TripModel { Name = tripName };
+
+            TripModel result = new TripModel();
+            using (var cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                // insert
+                string sqlStringInsert = "INSERT INTO TRIP(NAME,ISFINISHED) VALUES (@Name,0)";
+                int x = cnn.Execute(sqlStringInsert, temp);
+
+                // load 
+                int currentMaxTripID = cnn.QueryFirst<int>("SELECT IFNULL(MAX(ID), 0) FROM TRIP");
+                result = LoadSingleTrip(currentMaxTripID); 
+            };
+            return result; 
+        }
+
+        public static TripModel AddNewTrip(string tripName, List<MemberInTripModel> memberInTripModels, List<ExpenseModel> expenseModels,List<PlaceModel> placeModels)
+        {
+            TripModel initializedTrip = AddEmptyTrip(tripName); 
+            // Add member
+            foreach(var memberInTrip in memberInTripModels)
+            {
+                bool isNewMember = (memberInTrip.ID < 0); 
+
+                if(isNewMember)
+                {
+                    initializedTrip.AddNewMemberToTrip(new MemberModel
+                    {
+                        Name = memberInTrip.Name
+                    },memberInTrip.MoneyPaid);
+                }
+                else
+                {
+                    initializedTrip.AddAlreadyExistedMember(new MemberModel
+                    {
+                        ID = memberInTrip.ID,
+                        Name = memberInTrip.Name
+                    },memberInTrip.MoneyPaid) ;
+                }
+
+            }
+            // Add expense 
+            foreach(var expense in expenseModels)
+            {
+                initializedTrip.AddExpense(expense); 
+            }
+
+            // Add place
+            foreach(var place in placeModels)
+            {
+                initializedTrip.AddPlace(place);
+            }
+            return initializedTrip; 
+        }
+
         // Load 1 trip
         public static TripModel LoadSingleTrip(int IDToFind)
         {

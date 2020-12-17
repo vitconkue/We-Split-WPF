@@ -65,13 +65,13 @@ namespace We_Split_WPF.Model
             }
         }
 
-        public void AddAlreadyExistedMember(MemberModel memberModel)
+        public void AddAlreadyExistedMember(MemberModel memberModel, int moneyPaid  = 0)
         {
             var newMemberJoin = new MemberInTripModel
             {
                 ID = memberModel.ID,
                 Name = memberModel.Name,
-               
+                MoneyPaid = moneyPaid
             };
 
             this.memberList.Add(newMemberJoin);
@@ -83,13 +83,13 @@ namespace We_Split_WPF.Model
         /// ////////// CHUA XU LI ID
         /// </summary>
         /// <param name="memberModel"></param>
-        public void AddNewMemberToTrip(MemberModel memberModel) // pass model with Name only
+        public void AddNewMemberToTrip(MemberModel memberModel, int moneyPaid = 0) // pass model with Name only
         {
             // add new member to member table
             int newID = DatabaseAccess.AddMemberToDB(memberModel);
             // Now she exists, Make her join the trip
             memberModel.ID = newID; 
-            AddAlreadyExistedMember(memberModel); 
+            AddAlreadyExistedMember(memberModel,moneyPaid); 
 
         }
 
