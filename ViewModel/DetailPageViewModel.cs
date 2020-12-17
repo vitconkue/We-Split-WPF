@@ -11,7 +11,6 @@ namespace We_Split_WPF.ViewModel
     {
         public TripModel Trip { get; set; }
         private MainViewModel viewModel;
-        public MemberInTripModel Members { get; set; }
         public ICommand UpdateTrip { get; set; }
         public DetailPageViewModel(int ID,MainViewModel param)
         {
@@ -19,6 +18,8 @@ namespace We_Split_WPF.ViewModel
             Trip.Name = Trip.Name.ToUpper();
             this.viewModel = param;
             UpdateTrip = new UpdateTripCommand(viewModel,ID);
+            
+            
         }
     }
 }

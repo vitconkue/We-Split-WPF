@@ -1,21 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using We_Split_WPF.Command;
 using We_Split_WPF.Model;
 
 namespace We_Split_WPF.ViewModel
 {
-   public class UpdatePageViewModel: BaseViewModel
+    public class UpdatePageViewModel : BaseViewModel
     {
         private int id;
         private MainViewModel viewModel;
         public ICommand UpdateTrip { get; set; }
-        private List<ExpenseModel> _expenses;
-        public List<ExpenseModel> Expenses
+        public ICommand AddMoneyForMemmber { get; set; }
+        public ICommand AddExpense { get; set; }
+        private string _currentMoney = "123";
+        public string CurrentMoney
+        {
+            get
+            {
+                return _currentMoney;
+            }
+            set
+            {
+                _currentMoney = value;
+                OnPropertyChanged(nameof(CurrentMoney));
+            }
+        }
+        private ObservableCollection<ExpenseModel> _expenses;
+        public ObservableCollection<ExpenseModel> Expenses
         {
             get
             {
@@ -24,22 +41,37 @@ namespace We_Split_WPF.ViewModel
             set
             {
                 _expenses = value;
-                OnPropertyChanged("Expenses");
+                OnPropertyChanged(nameof(Expenses));
             }
         }
         public TripModel Trip { get; set; }
-        public UpdatePageViewModel(int ID,MainViewModel param)
+        public UpdatePageViewModel(int ID, MainViewModel param)
         {
             id = ID;
             viewModel = param;
             Trip = DatabaseAccess.LoadSingleTrip(id);
-            Expenses = Trip.expensesList;
-           
+            Expenses = new ObservableCollection<ExpenseModel>(Trip.expensesList);
+            AddMoneyForMemmber = new RelayCommand(o => UpdateMemberMoney(o));
+            AddExpense = new RelayCommand(o => AddExpenseForTrip(o));
         }
-        public void test()
+        public void UpdateMemberMoney(object o)
         {
-            ExpenseModel temp = new ExpenseModel();
-            Trip.AddExpense(temp);
+            var parameter = o;
+
+            var x = CurrentMoney;
+        }
+        public void AddExpenseForTrip(object o)
+        {
+            var parameter = (object[])o;
+            if (parameter[0].ToString() != "" || parameter[1].ToString() != "")
+            {
+                ExpenseModel temp = new ExpenseModel();
+                temp.Name = parameter[0].ToString();
+                temp.AmountMoney = int.Parse(parameter[1].ToString());
+                Expenses.Add(temp);
+                OnPropertyChanged(nameof(Expenses));
+                Trip.AddExpense(temp);
+            }
         }
     }
 }

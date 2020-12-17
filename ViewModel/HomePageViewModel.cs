@@ -48,6 +48,7 @@ namespace We_Split_WPF.ViewModel
             OnPropertyChanged("TripsToShow");
         }
 
+        public ICommand UpdateTripFromHome { get; set; }
         public HomePageViewModel(MainViewModel param)
         {
             //TripsToShow = DatabaseAccess.LoadAllTrips();
@@ -71,6 +72,7 @@ namespace We_Split_WPF.ViewModel
 
 
 
+            UpdateTripFromHome = new UpdateTripFromHomeCommand(MainViewModel);
         }
 
     }

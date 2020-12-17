@@ -19,6 +19,7 @@ namespace We_Split_WPF.Model
         {
             Console.WriteLine($" Expense  #: {Number},Expense Name: {Name}, AmountMoney: {AmountMoney}");
         }
+    
      
     }
 }
