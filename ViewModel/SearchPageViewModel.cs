@@ -7,6 +7,8 @@ using We_Split_WPF.Model;
 using We_Split_WPF.Command;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using We_Split_WPF.Helper;
+using System.Diagnostics;
 
 namespace We_Split_WPF.ViewModel
 {
@@ -31,7 +33,15 @@ namespace We_Split_WPF.ViewModel
         }
         public void SearchFunction(object o)
         {
+            var patameters = (object[])o;
+            string searchText = (string)patameters[0];
+            bool isByTripName = (bool)patameters[1];
+            bool isByMemberName = (bool)patameters[2];
 
+            // Change source    
+
+            Debug.WriteLine("OK");
+            
         }
     }
 }

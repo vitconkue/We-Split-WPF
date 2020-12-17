@@ -29,7 +29,7 @@ namespace We_Split_WPF.View
         {
             try
             {
-                if (MemberName.IsChecked == true)
+                if ( MemberName.IsChecked == true)
                 {
                     MemberName.IsChecked = false;
                 }

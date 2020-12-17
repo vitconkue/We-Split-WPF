@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using We_Split_WPF.Model;
 using Dapper;
 using We_Split_WPF.Helper;
-
+using System.Diagnostics;
 
 namespace We_Split_WPF.Model
 {
@@ -259,7 +259,7 @@ namespace We_Split_WPF.Model
             return currrentPlaceNumber + 1; 
         }
         // Search with keyword (name only) 
-        public static List<TripModel> SearchKeyword(string searchKey)
+        public static List<TripModel> SearchByTripName(string searchKey)
         {
             List<TripModel> result = new List<TripModel>();
 
@@ -290,6 +290,41 @@ namespace We_Split_WPF.Model
             return result;
 
 
+        }
+
+        public static List<TripModel> SearchByMemberName(string keyword)
+        {
+            List<TripModel> result = new List<TripModel>();
+            // a Trip ID - memberName dictionary 
+            List<(int, string)> keyValuePairs = new List<(int, string)>();
+
+            using (var cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string keyValuePairSqlString = "select TripID,Name from member join memberjointrip on member.ID = memberjointrip.MemberID";
+                var outputPairs = cnn.Query<(int, string)>(keyValuePairSqlString, new DynamicParameters());
+                keyValuePairs = outputPairs.ToList();
+                Debug.Write("rgrgrg");
+            }
+
+
+            var filtered = keyValuePairs
+                .Where(r => r.Item2.ToLower().Contains(keyword.ToLower()) ||
+                    HelperFunctions.RemovedUTF(r.Item2.ToLower()).Contains(HelperFunctions.RemovedUTF(keyword.ToLower()))).ToList();
+
+            filtered = filtered.OrderByDescending(r => HelperFunctions.rateSearchResult(keyword, r.Item2)).ToList();
+
+            // Load the trips
+            List<int> alreadyAdded = new List<int>();
+            foreach (var pair in filtered)
+            {
+                if (!alreadyAdded.Contains(pair.Item1))
+                {
+                    result.Add(LoadSingleTrip(pair.Item1));
+                    alreadyAdded.Add(pair.Item1);
+                }
+            }
+
+            return result;
         }
 
         #region Paging opration
