@@ -204,6 +204,20 @@ namespace We_Split_WPF.ViewModel
             }
         }
 
+        private int _memberID;
+        public int MemberID
+        {
+            get { return this._memberID; }
+            set
+            {
+                if (this._memberID != value)
+                {
+                    this._memberID = value;
+                    this.OnPropertyChanged(nameof(_memberID));
+                }
+            }
+        }
+
         /// 
         public AddNewTripPageViewModel()
         {
@@ -255,6 +269,7 @@ namespace We_Split_WPF.ViewModel
             if(MemberNameData!=null && MemberMoneyData!=null)
             {
                 MemberInTripModel temp = new MemberInTripModel();
+                temp.ID = MemberID;
                 temp.Name = MemberNameData;
                 if (MemberMoneyData != null)
                 {
@@ -265,18 +280,16 @@ namespace We_Split_WPF.ViewModel
                     temp.MoneyPaid = 0;
                 }
                 MemberList.Add(temp);
-                for (int i = 0; i < AllMember.Count(); i++)
+                if(MemberID>=0)
                 {
-                    if (AllMember[i].Name == MemberNameData)
-                    {
-                        AllMember.RemoveAt(i);
-                    }
+                    AllMember.RemoveAt(MemberID);
                 }
             }
             else
             {
                 MessageBox.Show("Vui lòng nhập đủ thông tin trước khi thêm!!!");
             }
+            MemberID = -1;
             MemberNameData = null;
             MemberMoneyData = null;
             OnPropertyChanged(nameof(MemberList));

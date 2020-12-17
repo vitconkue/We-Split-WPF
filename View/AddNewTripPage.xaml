@@ -119,7 +119,8 @@
 									<TextBlock Style="{DynamicResource SidebarText}" FontSize="26" FontWeight="ExtraBlack" Foreground="{DynamicResource PrimaryHueDarkBrush}" >THÀNH VIÊN</TextBlock>
 									<StackPanel Orientation="Horizontal">
 										<StackPanel Orientation="Vertical" Margin="20">
-											<ComboBox Text="{Binding MemberNameData}"  x:Name="memberComboBox" ItemsSource="{Binding AllMember}" SelectedItem="{Binding ID}" DisplayMemberPath="Name" materialDesign:HintAssist.Hint="Thành viên tham gia" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True">
+											<ComboBox Text="{Binding MemberNameData}" x:Name="memberComboBox" ItemsSource="{Binding AllMember}" DisplayMemberPath="Name" SelectedIndex="{Binding MemberID}" materialDesign:HintAssist.Hint="Thành viên tham gia" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True">
+												
 											</ComboBox>
 											<TextBox Text="{Binding MemberMoneyData}" materialDesign:HintAssist.Hint="Sồ tiền đóng góp" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200" ></TextBox>
 											<Button Command="{Binding addMemberButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
