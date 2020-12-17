@@ -287,7 +287,15 @@ namespace We_Split_WPF.ViewModel
             if(MemberNameData!=null && MemberMoneyData!=null)
             {
                 MemberInTripModel temp = new MemberInTripModel();
-                temp.ID = MemberID;
+                if(MemberID == -1)
+                {
+                    temp.ID = -1;
+                }
+                else
+                {
+                    temp.ID = AllMember[MemberID].ID;
+                }
+                
                 temp.Name = MemberNameData;
                 if (MemberMoneyData != null)
                 {
@@ -339,13 +347,60 @@ namespace We_Split_WPF.ViewModel
             ExpensesNameData = null;
             ExpensesMoneyData = null;
             OnPropertyChanged(nameof(ExpensesList));
-            OnPropertyChanged(nameof(ExpensesNameData));
             OnPropertyChanged(nameof(ExpensesMoneyData));
+            OnPropertyChanged(nameof(ExpensesNameData));
+            
         }
 
         private void doneButtonClick()
         {
-            
+            if(TripName==null)
+            {
+                MessageBox.Show("Tên chuyến đi rỗng!!!");
+            }
+            else if(ImageSource==null)
+            {
+                MessageBox.Show("Image is empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                List<MemberInTripModel> tempMember = new List<MemberInTripModel>();
+                List<PlaceModel> tempPlace = new List<PlaceModel>();
+                List<ExpenseModel> tempExpenses = new List<ExpenseModel>();
+                for (int i = 0; i < MemberList.Count(); i++)
+                {
+                    tempMember.Add(MemberList[i]);
+                }
+                for (int i = 0; i < PlaceList.Count(); i++)
+                {
+                    tempPlace.Add(PlaceList[i]);
+                }
+                for (int i = 0; i < ExpensesList.Count(); i++)
+                {
+                    tempExpenses.Add(ExpensesList[i]);
+                }
+                TripModel newTrip = DatabaseAccess.AddNewTrip(TripName, tempMember, tempExpenses, tempPlace);
+                //Thêm hình
+                if (ImageSource == null)
+                {
+                    ImageSource = "";
+                }
+                var directory = AppDomain.CurrentDomain.BaseDirectory;
+                directory += "Data\\Images\\TripsImage\\" + newTrip.ID + "\\Main";
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                string fileName = "main.png";
+                string sourcePath = ImageSource;
+                string targetPath = directory;
+                //Combine file và đường dẫn
+                string sourceFile = System.IO.Path.Combine(sourcePath, "");
+                string destFile = System.IO.Path.Combine(targetPath, fileName);
+                //Copy file từ file nguồn đến file đích
+                System.IO.File.Copy(sourceFile, destFile, true);
+                
+            }
         }
 
         private void addImageButtonClick()
