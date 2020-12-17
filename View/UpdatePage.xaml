@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:We_Split_WPF.View"
       xmlns:converter="clr-namespace:We_Split_WPF.Converter"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -119,7 +120,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock Style="{DynamicResource Title}">THÀNH VIÊN</TextBlock>
                             <ScrollViewer Grid.Row="1">
-                                    <DataGrid Background="White" IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
+                                    <DataGrid Background="White" IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged">
                                         <DataGrid.Columns>
 
 
@@ -130,7 +131,7 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button Command="{Binding DataContext.AddMoneyForMemmber, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}" Content="Đóng thêm">
-                     
+                                                          
                                                         </Button>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
@@ -138,7 +139,9 @@
                                             <DataGridTemplateColumn>
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <TextBox x:Name="Money"  materialDesign:HintAssist.Hint="Số tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                                                        <TextBox  Text="{Binding DataContext.CurrentMoney,RelativeSource={RelativeSource AncestorType=DataGrid}}"   materialDesign:HintAssist.Hint="Số tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                                           
+                                                        </TextBox>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
@@ -246,7 +249,7 @@
 
                                     <TextBlock Style="{DynamicResource Title}">CÁC KHOẢN CHI HIỆN TẠI</TextBlock>
                                     <StackPanel Orientation="Vertical" Margin="10">
-                                        <DataGrid Style="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" ItemsSource="{Binding Expenses, Mode=TwoWay}" AutoGenerateColumns="False">
+                                        <DataGrid Style="{DynamicResource MaterialDesignDataGrid}" IsReadOnly="True" ItemsSource="{Binding Expenses, Mode=OneWay}" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
                                               
 

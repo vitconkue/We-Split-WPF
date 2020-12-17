@@ -18,6 +18,19 @@ namespace We_Split_WPF.ViewModel
         public ICommand UpdateTrip { get; set; }
         public ICommand AddMoneyForMemmber { get; set; }
         public ICommand AddExpense { get; set; }
+        private string _currentMoney = "123";
+        public string CurrentMoney
+        {
+            get
+            {
+                return _currentMoney;
+            }
+            set
+            {
+                _currentMoney = value;
+                OnPropertyChanged(nameof(CurrentMoney));
+            }
+        }
         private ObservableCollection<ExpenseModel> _expenses;
         public ObservableCollection<ExpenseModel> Expenses
         {
@@ -44,8 +57,8 @@ namespace We_Split_WPF.ViewModel
         public void UpdateMemberMoney(object o)
         {
             var parameter = o;
-            MessageBox.Show("Click");
 
+            var x = CurrentMoney;
         }
         public void AddExpenseForTrip(object o)
         {
