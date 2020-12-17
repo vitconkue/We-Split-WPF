@@ -231,8 +231,8 @@ namespace We_Split_WPF.ViewModel
                 PlaceModel temp = new PlaceModel();
                 temp.Name = PlaceNameData;
                 temp.Information = PlaceInfoData;
-                temp.DateStart = PlaceDSData.ToString("MM/dd/yyyy");
-                temp.DateFinish = PlaceDFData.ToString("MM/dd/yyyy");
+                temp.DateStart = PlaceDSData.ToString("dd/MM/yyyy");
+                temp.DateFinish = PlaceDFData.ToString("dd/MM/yyyy");
                 PlaceList.Add(temp);
             }
             else
@@ -314,9 +314,7 @@ namespace We_Split_WPF.ViewModel
 
         private void doneButtonClick()
         {
-            MessageBox.Show("Button 4 clicked");
-            TripName = "Gần Done!!!!!! :)))";
-            OnPropertyChanged(nameof(TripName));
+            
         }
     }
 

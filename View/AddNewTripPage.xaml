@@ -120,7 +120,6 @@
 									<StackPanel Orientation="Horizontal">
 										<StackPanel Orientation="Vertical" Margin="20">
 											<ComboBox Text="{Binding MemberNameData}"  x:Name="memberComboBox" ItemsSource="{Binding AllMember}" SelectedItem="{Binding ID}" DisplayMemberPath="Name" materialDesign:HintAssist.Hint="Thành viên tham gia" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True">
-												
 											</ComboBox>
 											<TextBox Text="{Binding MemberMoneyData}" materialDesign:HintAssist.Hint="Sồ tiền đóng góp" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200" ></TextBox>
 											<Button Command="{Binding addMemberButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
@@ -169,9 +168,15 @@
 								</StackPanel>
 							</materialDesign:Card>
 							<Grid Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,100,30">
-								<Button Command="{Binding doneButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Width="125" Height="45">
-									<TextBlock Text="HOÀN THÀNH" />
-								</Button>
+								<StackPanel>
+									<Button>
+										<materialDesign:PackIcon Kind="ImagePlus" VerticalAlignment="Center" Height="50" Width="50" Foreground="{DynamicResource PrimaryHueDarkBrush}"/>
+									</Button>
+									
+									<Button Command="{Binding doneButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Width="125" Height="45">
+										<TextBlock Text="HOÀN THÀNH" />
+									</Button>
+								</StackPanel>
 							</Grid>
 						</Grid>
 					</Grid>
