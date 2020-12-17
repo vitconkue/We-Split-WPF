@@ -84,7 +84,6 @@
     <Compile Include="Helper\HelperFunctions.cs" />
     <Compile Include="Helper\PageInfo.cs" />
     <Compile Include="Helper\Paging.cs" />
-    <Compile Include="Command\ReplyCommand.cs" />
     <Compile Include="Command\UpdateHomeViewCommand.cs" />
     <Compile Include="Command\UpdateMainViewCommand.cs" />
     <Compile Include="ViewModel\AddNewTripPageViewModel.cs" />
