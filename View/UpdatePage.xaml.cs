@@ -25,9 +25,8 @@ namespace We_Split_WPF.View
             InitializeComponent();
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+    
 
-        }
+      
     }
 }

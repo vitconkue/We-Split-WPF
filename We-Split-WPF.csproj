@@ -178,7 +178,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Images\TripsImage\1\Location\" />
     <Folder Include="Data\Images\TripsImage\2\Location\" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Database\wesplit.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\TripsImage\1\Location\tải xuống.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Images\TripsImage\2\Main\main.png">

@@ -140,7 +140,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock    Style="{DynamicResource Title}" HorizontalAlignment="Center" Grid.Row="0">THÀNH VIÊN</TextBlock>
                                 <Grid  Grid.Row="1">
-                                    <DataGrid Background="White" IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
+                                    <DataGrid IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
                                         <DataGrid.Columns>
                                            
 
@@ -187,7 +187,7 @@
                                             <RowDefinition Height="10*"></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <TextBlock FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">LỘ TRÌNH</TextBlock>
-                                        <DataGrid  Grid.Row="1" Background="White" IsReadOnly="True" ItemsSource="{Binding Trip.placeList}" AutoGenerateColumns="False">
+                                        <DataGrid  Grid.Row="1"  IsReadOnly="True" ItemsSource="{Binding Trip.placeList}" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
                                                
 

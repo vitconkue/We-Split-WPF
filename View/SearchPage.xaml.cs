@@ -25,6 +25,34 @@ namespace We_Split_WPF.View
             InitializeComponent();
         }
 
-    
+        private void TripName_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MemberName.IsChecked == true)
+                {
+                    MemberName.IsChecked = false;
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void MemberName_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (TripName.IsChecked == true)
+                {
+                    TripName.IsChecked = false;
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
