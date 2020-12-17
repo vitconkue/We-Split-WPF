@@ -108,10 +108,28 @@ namespace We_Split_WPF.Model
         }
 
         // Loads all the trip
-        public static List<TripModel> LoadAllTrips()
+        public static List<TripModel> LoadAllTrips(string filter = "all")
         {
             List<TripModel> result = new List<TripModel>();
-            string sqlString = "SELECT * FROM TRIP";
+            string sqlString = "SELECT * FROM TRIP ";
+            switch(filter)
+            {
+                case "all":
+                    {
+                        break; 
+                    }
+                case "going":
+                    {
+                        sqlString += "WHERE ISFINISHED = 0";
+                        break;
+                    }
+                case "finished":
+                    {
+                        sqlString += "WHERE ISFINISHED = 1";
+                        break;
+                    }
+                default: break; 
+            }
             using (var cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<TripModel>(sqlString, new DynamicParameters());
@@ -277,22 +295,59 @@ namespace We_Split_WPF.Model
         #region Paging opration
 
         // Get current total trip 
-        public static int GetTotalTripCount()
+        public static int GetTripCount(string filter = "all")
         {
             int result = 0; 
             using (var cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                string sqlString = "SELECT COUNT(ID) FROM TRIP";
+                string sqlString = "SELECT COUNT(ID) FROM TRIP "; 
+                switch(filter)
+                {
+                    case "all":
+                        {
+                            break; 
+                        }
+                    case "going":
+                        {
+                            sqlString += "WHERE ISFINISHED = 0";
+                            break;
+                        }
+                    case "finished":
+                        {
+                            sqlString += "WHERE ISFINISHED = 1";
+                            break;
+                        }
+                }
                 result = cnn.QueryFirst<int>(sqlString, new DynamicParameters()); 
             }
             return result; 
         }
+        
 
         // Get trips with page info
-        public static List<TripModel> GetTripWithPageInfo(int pageNumber, int numberOfTripPerPage)
+        public static List<TripModel> GetTripWithPageInfo(int pageNumber, int numberOfTripPerPage, string filter = "all") //"Tất cả" // "Đang đi"
         {
             List<TripModel> result = new List<TripModel>();
-            List<TripModel> allTrips = LoadAllTrips();
+            List<TripModel> allTrips = new List<TripModel>(); 
+
+            switch(filter)
+            {
+                case "all":
+                    {
+                        allTrips = LoadAllTrips(); 
+                        break;
+                    }
+                case "going":
+                    {
+                        allTrips = LoadAllTrips("going");
+                        break;
+                    }
+                case "finished":
+                    {
+                        allTrips = LoadAllTrips("finished");
+                        break; 
+                    }
+            }    
 
             result = allTrips.Skip((pageNumber - 1) * numberOfTripPerPage).Take(numberOfTripPerPage).ToList();
             return result; 

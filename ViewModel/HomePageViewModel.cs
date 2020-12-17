@@ -8,8 +8,8 @@ using System.Windows;
 using System.Windows.Input;
 using We_Split_WPF.Command;
 using We_Split_WPF.Model;
-using We_Split_WPF.Helper; 
-
+using We_Split_WPF.Helper;
+using System.Windows.Controls;
 
 namespace We_Split_WPF.ViewModel
 {
@@ -25,27 +25,72 @@ namespace We_Split_WPF.ViewModel
 
         public Paging PagingVar { get; set;  }
         public int tripPerPage { get; set;  }
+
+        private int _currentFilter;
+      
+                     
+        public int CurrentFilter
+        {
+            get => _currentFilter;
+            set
+            {
+                _currentFilter = value;
+                //MessageBox.Show(CurrentFilter.Content.ToString());
+
+                 CalculatePaging(); 
+                   
+            }
+        }
+        
+        public string filterString
+        {
+            get
+            {
+                switch(CurrentFilter)
+                {
+                    case 0:
+                        return "all";
+                    case 1:
+                        return "going";
+                    case 2:
+                        return "finished";
+                    default:
+                        return "all";
+                }
+            }
+        }
       
 
 
-        public void RecalculatePaging()
+        public void CalculatePaging()
         {
-            // recalcute with certain info: filter
+            int tripCount = DatabaseAccess.GetTripCount(filterString);
+            PagingVar = new Paging { 
+                CurrentPage = 1,  
+                TotalPages = tripCount / tripPerPage +
+                    (((tripCount % tripPerPage) == 0) ? 0 : 1),
+                TripPerPage = tripPerPage
+            };
+            OnPropertyChanged("PagingVar");
+            TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage, PagingVar.TripPerPage,filterString);
+            OnPropertyChanged("TripsToShow");
         }
 
         public void GoToNextPage()
         {
+            
             PagingVar.CurrentPage++;
             OnPropertyChanged("PagingVar");
 
-            TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage, PagingVar.TripPerPage);
+            TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage, PagingVar.TripPerPage,filterString);
             OnPropertyChanged("TripsToShow"); 
         }
         public void GoToPreviousPage()
         {
+           
             PagingVar.CurrentPage--;
             OnPropertyChanged("PagingVar");
-            TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage, PagingVar.TripPerPage);
+            TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage, PagingVar.TripPerPage,filterString);
             OnPropertyChanged("TripsToShow");
         }
 
@@ -62,19 +107,15 @@ namespace We_Split_WPF.ViewModel
             tripPerPage = 1;
 
             NextPage = new NextPageHomeCommand(this);
-            PreviousPage = new PreviousPageHomeCommand(this); 
+            PreviousPage = new PreviousPageHomeCommand(this);
+            CurrentFilter = 0;
 
-            int tripCount = DatabaseAccess.GetTotalTripCount();
-            PagingVar = new Paging {
-                CurrentPage = 1,
-                TotalPages = tripCount / tripPerPage +
-                    (((tripCount % tripPerPage) == 0) ? 0 : 1),
-                TripPerPage = tripPerPage 
-                
-            };
+            int tripCount = DatabaseAccess.GetTripCount();
+            CalculatePaging(); 
             TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage,PagingVar.TripPerPage);
 
-
+            
+            
 
             UpdateTripFromHome = new UpdateTripFromHomeCommand(MainViewModel);
         }

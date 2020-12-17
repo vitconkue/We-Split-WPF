@@ -87,7 +87,7 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <ComboBox materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" Margin="100 0 0 0" Style="{DynamicResource MaterialDesignFloatingHintComboBox}" Width="200">
+                    <ComboBox SelectedIndex="{Binding CurrentFilter}" materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" Margin="100 0 0 0" Style="{DynamicResource MaterialDesignFloatingHintComboBox}" Width="200">
                         <ComboBoxItem IsSelected="True">
                             TẤT CẢ
                          </ComboBoxItem>
