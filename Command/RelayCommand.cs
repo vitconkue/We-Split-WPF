@@ -22,8 +22,8 @@ namespace We_Split_WPF.Command
 
         public bool CanExecute(object parameter)
         {
+                return true;
            
-            return true;
         }
 
         public event EventHandler CanExecuteChanged

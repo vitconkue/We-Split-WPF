@@ -68,6 +68,7 @@
             <Setter Property="Padding" Value="10"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
+        
         <converter:CommandParameterConverter x:Key="CPC"></converter:CommandParameterConverter>
     </UserControl.Resources>
 
@@ -86,8 +87,8 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <StackPanel HorizontalAlignment="Right">
-                        <Button Margin="0 0 10 0">
+                    <StackPanel HorizontalAlignment="Right" Margin="0 0 50 0">
+                        <Button Command="{Binding EndTrip}" Margin="0 0 10 0">
                             <StackPanel>
                                 <materialDesign:PackIcon Margin="0 0 10 0" Kind="DeleteCircle"></materialDesign:PackIcon>
                                 <TextBlock VerticalAlignment="Center">KẾT THÚC</TextBlock>

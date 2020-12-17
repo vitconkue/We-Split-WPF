@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,11 +18,13 @@ namespace We_Split_WPF.ViewModel
         public TripModel Trip { get; set; }
         private MainViewModel viewModel;
         public ICommand UpdateTrip { get; set; }
+        public ICommand BackToHomePage { get; set; }
         public ICommand AddPlaceImage { get; set; }
         public ICommand PrevClick { get; set; }
         public ICommand NextClick { get; set; }
+        public ICommand EndTrip { get; set; }
         private Uri _placeImageDisplay;
-        private string _currentStringDisplay;
+        private string _currentStringDisplay = "0 OF 0";
         public string CurrentStringDisplay
         {
             get
@@ -58,6 +61,9 @@ namespace We_Split_WPF.ViewModel
             AddPlaceImage = new RelayCommand(o => AddPlaceImageForTrip());
             PrevClick = new RelayCommand(o => PrevButtonClick());
             NextClick = new RelayCommand(o => NextButtonClick());
+            EndTrip= new RelayCommand(o => EndTripClick());
+            
+            BackToHomePage = new UpdateMainViewCommand(viewModel);         
             try
             {
                 PlaceImages = Trip.PlaceImages;
@@ -68,7 +74,7 @@ namespace We_Split_WPF.ViewModel
             }
             catch
             {
-
+                
             }
 
         }
@@ -144,6 +150,23 @@ namespace We_Split_WPF.ViewModel
             {
 
             }
+        }
+        public void EndTripClick()
+        {
+            Trip.ToogleIsFinished();
+            var a = new DialogHost();
+             a.ShowDialog((object)"test");
+            MessageBoxImage icon = MessageBoxImage.Question;
+            MessageBoxResult dialogResult = MessageBox.Show("Kết thúc chuyến đi này?", "Confirmation", MessageBoxButton.YesNo, icon);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                BackToHomePage.Execute((object)"HomePage");
+            }
+            else
+            {
+                //do something else
+            }
+           
         }
     }
 }

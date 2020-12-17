@@ -55,6 +55,7 @@
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -173,28 +174,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Images\TripsImage\1\Location\" />
     <Folder Include="Data\Images\TripsImage\2\Location\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="hnet.com-image.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Data\Images\200944.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Data\Images\g.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Data\Images\pie.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Data\Images\island.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Data\Database\wesplit.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\Images\TripsImage\1\Location\tải xuống.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Images\TripsImage\2\Main\main.png">

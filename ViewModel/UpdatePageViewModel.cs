@@ -19,6 +19,7 @@ namespace We_Split_WPF.ViewModel
         public ICommand AddMoneyForMemmber { get; set; }
         public ICommand AddExpense { get; set; }
         public ICommand AddPlace { get; set; }
+        public ICommand BackToTrip { get; set; }
         private string _currentMoney = "";
         private string _moneyReceived;
         public string MoneyReceived
@@ -97,24 +98,30 @@ namespace We_Split_WPF.ViewModel
             AddExpense = new RelayCommand(o => AddExpenseForTrip(o));
             MemberList = new ObservableCollection<MemberInTripModel>(Trip.memberList);
             MoneyReceived = Trip.MoneyReceived.ToString();
+            BackToTrip = new RelayCommand(o => BackToTripPage());
         }
         public void UpdateMemberMoney(object o)
         {
-            var temp = (MemberInTripModel)o;
-            Trip.GetMoreMoneyFromMember(temp, int.Parse(CurrentMoney));
-            MemberList = new ObservableCollection<MemberInTripModel>(Trip.memberList);
-            OnPropertyChanged(nameof(MemberList));
-            MoneyReceived = Trip.MoneyReceived.ToString();
-            CurrentMoney = "";
+            int result;
+            if (int.TryParse(CurrentMoney,out result))
+            {
+                var temp = (MemberInTripModel)o;
+                Trip.GetMoreMoneyFromMember(temp, result);
+                MemberList = new ObservableCollection<MemberInTripModel>(Trip.memberList);
+                OnPropertyChanged(nameof(MemberList));
+                MoneyReceived = Trip.MoneyReceived.ToString();
+                CurrentMoney = "";
+            }
         }
         public void AddExpenseForTrip(object o)
         {
+            int result;
             var parameter = (object[])o;
-            if (parameter[0].ToString() != "" || parameter[1].ToString() != "")
+            if ((parameter[0].ToString() != "" && parameter[1].ToString() != "") && int.TryParse(parameter[1].ToString(),out result))
             {
                 ExpenseModel temp = new ExpenseModel();
                 temp.Name = parameter[0].ToString();
-                temp.AmountMoney = int.Parse(parameter[1].ToString());
+                temp.AmountMoney = result;
                 Expenses.Add(temp);
                 OnPropertyChanged(nameof(Expenses));
                 Trip.AddExpense(temp);
@@ -144,6 +151,11 @@ namespace We_Split_WPF.ViewModel
             PlaceList.Add(temp);
             OnPropertyChanged(nameof(Trip));
           
+        }
+        public void BackToTripPage()
+        {
+            ICommand temp = new UpdateHomeViewCommand(viewModel);
+            temp.Execute((object)Trip.ID);
         }
     }
 }
