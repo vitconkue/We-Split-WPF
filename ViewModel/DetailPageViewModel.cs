@@ -18,7 +18,6 @@ namespace We_Split_WPF.ViewModel
         public TripModel Trip { get; set; }
         private MainViewModel viewModel;
         public ICommand UpdateTrip { get; set; }
-        public ICommand BackToHomePage { get; set; }
         public ICommand AddPlaceImage { get; set; }
         public ICommand PrevClick { get; set; }
         public ICommand NextClick { get; set; }
@@ -63,7 +62,7 @@ namespace We_Split_WPF.ViewModel
             NextClick = new RelayCommand(o => NextButtonClick());
             EndTrip= new RelayCommand(o => EndTripClick());
             
-            BackToHomePage = new UpdateMainViewCommand(viewModel);         
+               
             try
             {
                 PlaceImages = Trip.PlaceImages;
@@ -154,6 +153,7 @@ namespace We_Split_WPF.ViewModel
         public void EndTripClick()
         {
             Trip.ToogleIsFinished();
+            ICommand BackToHomePage = new UpdateMainViewCommand(viewModel);
             var a = new DialogHost();
              a.ShowDialog((object)"test");
             MessageBoxImage icon = MessageBoxImage.Question;
