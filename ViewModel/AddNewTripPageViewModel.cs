@@ -396,10 +396,16 @@ namespace We_Split_WPF.ViewModel
                     ImageSource = "";
                 }
                 var directory = AppDomain.CurrentDomain.BaseDirectory;
+                var locationDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 directory += "Data\\Images\\TripsImage\\" + newTrip.ID + "\\Main";
+                locationDirectory += "Data\\Images\\TripsImage\\" + newTrip.ID + "\\Location";
                 if (!Directory.Exists(directory))
                 {
                     Directory.CreateDirectory(directory);
+                }
+                if(!Directory.Exists(locationDirectory))
+                {
+                    Directory.CreateDirectory(locationDirectory);
                 }
                 string fileName = "main.png";
                 string sourcePath = ImageSource;
