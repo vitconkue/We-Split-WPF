@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:We_Split_WPF.View"
       xmlns:converter="clr-namespace:We_Split_WPF.Converter"
       mc:Ignorable="d" 
+              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
@@ -68,7 +69,7 @@
             <Setter Property="Padding" Value="10"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
-        
+
         <converter:CommandParameterConverter x:Key="CPC"></converter:CommandParameterConverter>
     </UserControl.Resources>
 
@@ -95,14 +96,14 @@
                             </StackPanel>
                         </Button>
                         <Button Command="{Binding UpdateTrip}" CommandParameter="Update"  Margin="0 0 10 0">
-                            
-                            
+
+
                             <StackPanel>
                                 <materialDesign:PackIcon Margin="0 0 10 0"  Kind="Update"></materialDesign:PackIcon>
-                            <TextBlock x:Name="Update" VerticalAlignment="Center">CẬP NHẬT</TextBlock>
+                                <TextBlock x:Name="Update" VerticalAlignment="Center">CẬP NHẬT</TextBlock>
                             </StackPanel>
                         </Button>
-                       
+
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1">
@@ -143,15 +144,15 @@
                                 <Grid  Grid.Row="1">
                                     <DataGrid IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
                                         <DataGrid.Columns>
-                                           
+
 
                                             <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
 
                                             <DataGridTextColumn Header="SÔ TIỀN ĐÃ ĐÓNG" Binding="{Binding MoneyPaid }" />
-                                           
-                                          
+
+
                                         </DataGrid.Columns>
-                                        
+
                                     </DataGrid>
 
                                 </Grid>
@@ -159,7 +160,7 @@
                         </materialDesign:Card>
                     </Grid>
                     <Grid Grid.Column="1">
-                      
+
                         <Grid.RowDefinitions>
                             <RowDefinition>
 
@@ -190,12 +191,12 @@
                                         <TextBlock FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">LỘ TRÌNH</TextBlock>
                                         <DataGrid  Grid.Row="1"  IsReadOnly="True" ItemsSource="{Binding Trip.placeList}" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
-                                               
+
 
                                                 <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
 
                                                 <DataGridTextColumn Header="THÔNG TIN" Binding="{Binding Information }" >
-                                                   
+
                                                 </DataGridTextColumn>
 
                                                 <DataGridTextColumn Header="NGÀY BẮT ĐẦU " Binding="{ Binding DateStart}"/>
@@ -210,9 +211,10 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <StackPanel HorizontalAlignment="Center">
-                                         <TextBlock FontWeight="Heavy" HorizontalAlignment="Center" Padding="0 10">ẢNH</TextBlock>
+                                            <TextBlock FontWeight="Heavy" HorizontalAlignment="Center" Padding="0 10">ẢNH</TextBlock>
                                             <Button Command="{Binding AddPlaceImage}" Margin="10 0 0 0">
-                                                <materialDesign:PackIcon Kind="ImageAdd"></materialDesign:PackIcon></Button>
+                                                <materialDesign:PackIcon Kind="ImageAdd"></materialDesign:PackIcon>
+                                            </Button>
                                         </StackPanel>
                                         <StackPanel Width="290" Grid.Row="1">
                                             <Image Source="{Binding PlaceImageDisplay}" Width="290">
@@ -236,7 +238,76 @@
                         </materialDesign:Card>
                         <materialDesign:Card Grid.Row="1" Margin="50,10.4" Grid.ColumnSpan="2">
                             <Grid >
-                               
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition>
+
+                                    </ColumnDefinition>
+                                    <ColumnDefinition>
+
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="10*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG THU</TextBlock>
+                                    <Grid Grid.Row="1">
+                                        <lvc:PieChart Series="{Binding ChartSeries}"   LegendLocation="Bottom">
+                                      
+
+                                        </lvc:PieChart>
+                                    </Grid>
+
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="10*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG CHI</TextBlock>
+                                    <Grid Grid.Row="1">
+                                        <lvc:PieChart LegendLocation="Bottom">
+                                            <lvc:PieChart.Series >
+                                                <lvc:PieSeries Values="10" Title="Ăn">
+
+                                                </lvc:PieSeries>
+                                                <lvc:PieSeries Values="20" Title="Ngủ">
+
+                                                </lvc:PieSeries >
+                                                <lvc:PieSeries Values="30" Title="Nghỉ">
+
+                                                </lvc:PieSeries>
+                                            </lvc:PieChart.Series>
+                                        </lvc:PieChart>
+                                    </Grid>
+
+                                </Grid>
+                                <Grid Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="10*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG THU</TextBlock>
+                                    <Grid Grid.Row="1">
+                                        <DataGrid IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+
+
+                                                <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
+
+                                                <DataGridTextColumn Header="SÔ TIỀN ĐÃ ĐÓNG" Binding="{Binding MoneyPaid }" />
+                                                <DataGridTextColumn Header="CÒN LẠI" Binding="{Binding getBalance }" />
+
+
+                                            </DataGrid.Columns>
+
+                                        </DataGrid>
+                                    </Grid>
+
+                                </Grid>
                             </Grid>
                         </materialDesign:Card>
                     </Grid>

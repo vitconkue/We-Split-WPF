@@ -11,6 +11,9 @@ using System.Windows;
 using System.Windows.Input;
 using We_Split_WPF.Command;
 using We_Split_WPF.Model;
+using LiveCharts;
+using LiveCharts.Wpf;
+
 namespace We_Split_WPF.ViewModel
 {
     public class DetailPageViewModel : BaseViewModel
@@ -22,6 +25,7 @@ namespace We_Split_WPF.ViewModel
         public ICommand PrevClick { get; set; }
         public ICommand NextClick { get; set; }
         public ICommand EndTrip { get; set; }
+        public Series ChartSeries { get; set; }
         private Uri _placeImageDisplay;
         private string _currentStringDisplay = "0 OF 0";
         public string CurrentStringDisplay
@@ -61,7 +65,9 @@ namespace We_Split_WPF.ViewModel
             PrevClick = new RelayCommand(o => PrevButtonClick());
             NextClick = new RelayCommand(o => NextButtonClick());
             EndTrip= new RelayCommand(o => EndTripClick());
-            
+            ChartSeries = new PieSeries();
+                    
+            ChartSeries.Title = "Test";
                
             try
             {
@@ -152,19 +158,27 @@ namespace We_Split_WPF.ViewModel
         }
         public void EndTripClick()
         {
-            Trip.ToogleIsFinished();
-            ICommand BackToHomePage = new UpdateMainViewCommand(viewModel);
-            var a = new DialogHost();
-             a.ShowDialog((object)"test");
-            MessageBoxImage icon = MessageBoxImage.Question;
-            MessageBoxResult dialogResult = MessageBox.Show("Kết thúc chuyến đi này?", "Confirmation", MessageBoxButton.YesNo, icon);
-            if (dialogResult == MessageBoxResult.Yes)
+            if (Trip.IsFinished)
             {
-                BackToHomePage.Execute((object)"HomePage");
+                MessageBoxImage errorIcon = MessageBoxImage.Error;
+                MessageBox.Show("Chuyến đi này đã kết thúc!!!", "Error", MessageBoxButton.OKCancel, errorIcon);
             }
             else
             {
-                //do something else
+                Trip.ToogleIsFinished();
+                ICommand BackToHomePage = new UpdateMainViewCommand(viewModel);
+                var a = new DialogHost();
+                a.ShowDialog((object)"test");
+                MessageBoxImage icon = MessageBoxImage.Question;
+                MessageBoxResult dialogResult = MessageBox.Show("Kết thúc chuyến đi này?", "Confirmation", MessageBoxButton.YesNo, icon);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    BackToHomePage.Execute((object)"HomePage");
+                }
+                else
+                {
+                    //do something else
+                }
             }
            
         }
