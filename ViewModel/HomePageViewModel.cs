@@ -65,10 +65,13 @@ namespace We_Split_WPF.ViewModel
         public void CalculatePaging()
         {
             int tripCount = DatabaseAccess.GetTripCount(filterString);
+            int newTotalPage = tripCount / tripPerPage +
+                    (((tripCount % tripPerPage) == 0) ? 0 : 1);
+            if (newTotalPage == 0) newTotalPage = 1; 
+            
             PagingVar = new Paging { 
                 CurrentPage = 1,  
-                TotalPages = tripCount / tripPerPage +
-                    (((tripCount % tripPerPage) == 0) ? 0 : 1),
+                TotalPages = newTotalPage,
                 TripPerPage = tripPerPage
             };
             OnPropertyChanged("PagingVar");
