@@ -121,7 +121,7 @@ namespace We_Split_WPF.ViewModel
         }
         public void addNewButtonClick()
         {
-            MainViewModel.SelectedViewModel = new AddNewTripPageViewModel();
+            MainViewModel.SelectedViewModel = new AddNewTripPageViewModel(MainViewModel);
         }
     }
 }

@@ -80,6 +80,7 @@ namespace We_Split_WPF.ViewModel
         public ICommand addImageButtonCommand { get; set; }
         public MainViewModel MainViewModel;
 
+
         ///  Biến Binding
         ///  
         private string _tripName;
@@ -236,7 +237,7 @@ namespace We_Split_WPF.ViewModel
         }
 
         /// 
-        public AddNewTripPageViewModel()
+        public AddNewTripPageViewModel(MainViewModel param)
         {
             AllMember = new ObservableCollection<MemberModel>();
             List<MemberModel> tempList = DatabaseAccess.LoadAllMember();
@@ -254,6 +255,7 @@ namespace We_Split_WPF.ViewModel
             ExpensesList = new ObservableCollection<ExpenseModel>();
             PlaceDSData = DateTime.Now;
             PlaceDFData = DateTime.Now;
+            MainViewModel = param;
         }
 
         private void addPlaceButtonClick()
@@ -399,7 +401,9 @@ namespace We_Split_WPF.ViewModel
                 string destFile = System.IO.Path.Combine(targetPath, fileName);
                 //Copy file từ file nguồn đến file đích
                 System.IO.File.Copy(sourceFile, destFile, true);
-                
+                MessageBox.Show("Thêm chuyến đi mới thành công!!!");
+                ICommand BackToHomePage = new UpdateMainViewCommand(MainViewModel);
+                BackToHomePage.Execute((object)"HomePage");
             }
         }
 
