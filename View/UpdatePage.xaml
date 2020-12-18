@@ -150,7 +150,7 @@
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition Height="4*"></RowDefinition>
                                             </Grid.RowDefinitions>
-                                        <TextBox Grid.Row="0"    Margin="5 0 0 0" Width="110"  Text="{Binding CurrentMoney}"   materialDesign:HintAssist.Hint="Số tiền đóng thêm" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                        <TextBox x:Name="AddMoney" PreviewTextInput="AddMoney_PreviewTextInput" Grid.Row="0"    Margin="5 0 0 0" Width="110"  Text="{Binding CurrentMoney}"   materialDesign:HintAssist.Hint="Số tiền đóng thêm" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
 
                                         </TextBox>
                                             <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Grid.Row="1">
@@ -251,7 +251,7 @@
                                         <TextBlock Style="{DynamicResource Title}">THÊM KHOẢN CHI</TextBlock>
                                         <StackPanel Orientation="Vertical" Margin="10">
                                             <TextBox x:Name="ExpenseName"  materialDesign:HintAssist.Hint="Chi cho" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360" Margin="20"></TextBox>
-                                            <TextBox  x:Name="ExpenseMoney"  materialDesign:HintAssist.Hint="Số tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360" Margin="20"></TextBox>
+                                            <TextBox PreviewTextInput="ExpenseMoney_PreviewTextInput"  x:Name="ExpenseMoney"  materialDesign:HintAssist.Hint="Số tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="360" Margin="20"></TextBox>
                                         </StackPanel>
                                         <Button Command="{Binding AddExpense}" Margin="0 10 0 0" Width="100" Content="THÊM">
                                             <Button.CommandParameter>
