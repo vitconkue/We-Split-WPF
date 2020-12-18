@@ -286,7 +286,7 @@ namespace We_Split_WPF.ViewModel
 
         private void addMemberButtonClick()
         {
-            if(MemberNameData!=null && MemberMoneyData!=null)
+            if(MemberNameData!=null && MemberMoneyData!=null && Helper.HelperFunctions.isNumericString(MemberMoneyData)==true)
             {
                 MemberInTripModel temp = new MemberInTripModel();
                 if(MemberID == -1)
@@ -313,6 +313,10 @@ namespace We_Split_WPF.ViewModel
                     AllMember.RemoveAt(MemberID);
                 }
             }
+            else if(Helper.HelperFunctions.isNumericString(MemberMoneyData) == false)
+            {
+                MessageBox.Show("Số tiền chỉ nhận giá trị số");
+            }
             else
             {
                 MessageBox.Show("Vui lòng nhập đủ thông tin trước khi thêm!!!");
@@ -328,7 +332,7 @@ namespace We_Split_WPF.ViewModel
 
         private void addExpensesButtonClick()
         {
-            if (ExpensesNameData != null && ExpensesMoneyData!=null)
+            if (ExpensesNameData != null && ExpensesMoneyData!=null && Helper.HelperFunctions.isNumericString(ExpensesMoneyData) == true)
             {
                 ExpenseModel temp = new ExpenseModel();
                 temp.Name = ExpensesNameData;
@@ -341,6 +345,10 @@ namespace We_Split_WPF.ViewModel
                     temp.AmountMoney = 0;
                 }
                 ExpensesList.Add(temp);
+            }
+            else if (Helper.HelperFunctions.isNumericString(ExpensesMoneyData) == false)
+            {
+                MessageBox.Show("Số tiền chỉ nhận giá trị số");
             }
             else
             {
