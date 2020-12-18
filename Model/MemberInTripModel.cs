@@ -13,7 +13,7 @@ namespace We_Split_WPF.Model
 
         public int MoneyPaid { get; set; } = 0; 
 
-        int getBalance(int currentTripExpense, int numberOfMember)
+        public int getBalance(int currentTripExpense, int numberOfMember)
         {
             return MoneyPaid - currentTripExpense/numberOfMember;
         }

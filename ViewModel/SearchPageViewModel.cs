@@ -15,7 +15,7 @@ namespace We_Split_WPF.ViewModel
     public class SearchPageViewModel : BaseViewModel
     {
         public string CurrentSearchString { get; set; }
-        public bool IsSearchByTripName { get; set; }
+        public bool IsSearchByTripNameAndPlace { get; set; }
         private ObservableCollection<TripModel> _trips;
         public ICommand Search { get; set; }
 
@@ -26,6 +26,9 @@ namespace We_Split_WPF.ViewModel
         public Paging PagingVar { get; set; }
         public int tripPerPage { get; set; }
 
+        private MainViewModel viewModel;
+
+        public ICommand UpdateSearchView { get; set; }
         public List<TripModel> TripsToShow { get; set; }
         public ObservableCollection<TripModel> Trips
         {
@@ -39,7 +42,7 @@ namespace We_Split_WPF.ViewModel
                 OnPropertyChanged(nameof(Trips));
             }
         }
-        public SearchPageViewModel(){
+        public SearchPageViewModel(MainViewModel param){
             tripPerPage = 1; 
             Search = new RelayCommand(o => SearchFunction(o));
             TripsToShow = new List<TripModel>(); 
@@ -47,11 +50,13 @@ namespace We_Split_WPF.ViewModel
             CurrentSearchString = "";
             NextPage = new NextPageSearchCommand(this);
             PreviousPage = new PreviousPageSearchCommand(this);
+            viewModel = param;
+            UpdateSearchView = new RelayCommand(o => GotoDetailPage(o));
         }
 
         public void CalculateChanging()
         {
-            int tripCount = DatabaseAccess.SearchResultCount(CurrentSearchString, IsSearchByTripName);
+            int tripCount = DatabaseAccess.SearchResultCount(CurrentSearchString, IsSearchByTripNameAndPlace);
             int newTotalPage = tripCount / tripPerPage +
                     (((tripCount % tripPerPage) == 0) ? 0 : 1);
             if (newTotalPage == 0) newTotalPage = 1; 
@@ -63,7 +68,7 @@ namespace We_Split_WPF.ViewModel
             };
             OnPropertyChanged("PagingVar");
 
-            TripsToShow = DatabaseAccess.GetSearchResultWithPage(CurrentSearchString, IsSearchByTripName, PagingVar.CurrentPage, PagingVar.TripPerPage);
+            TripsToShow = DatabaseAccess.GetSearchResultWithPage(CurrentSearchString, IsSearchByTripNameAndPlace, PagingVar.CurrentPage, PagingVar.TripPerPage);
             OnPropertyChanged("TripsToShow");
 
         }
@@ -73,9 +78,9 @@ namespace We_Split_WPF.ViewModel
         {
             var patameters = (object[])o;
             string searchText = (string)patameters[0];
-            bool isByTripName = (bool)patameters[1];
+            bool isByTripNameandPlace = (bool)patameters[1];
 
-            IsSearchByTripName = isByTripName;
+            IsSearchByTripNameAndPlace = isByTripNameandPlace;
             CurrentSearchString = searchText; 
             
 
@@ -93,7 +98,7 @@ namespace We_Split_WPF.ViewModel
             PagingVar.CurrentPage++;
             OnPropertyChanged("PagingVar");
 
-            TripsToShow = DatabaseAccess.GetSearchResultWithPage(CurrentSearchString, IsSearchByTripName, PagingVar.CurrentPage, PagingVar.TripPerPage);
+            TripsToShow = DatabaseAccess.GetSearchResultWithPage(CurrentSearchString, IsSearchByTripNameAndPlace, PagingVar.CurrentPage, PagingVar.TripPerPage);
             OnPropertyChanged("TripsToShow");
         }
         public void GoToPreviousPage()
@@ -101,8 +106,12 @@ namespace We_Split_WPF.ViewModel
 
             PagingVar.CurrentPage--;
             OnPropertyChanged("PagingVar");
-            TripsToShow = DatabaseAccess.GetSearchResultWithPage(CurrentSearchString, IsSearchByTripName, PagingVar.CurrentPage, PagingVar.TripPerPage);
+            TripsToShow = DatabaseAccess.GetSearchResultWithPage(CurrentSearchString, IsSearchByTripNameAndPlace, PagingVar.CurrentPage, PagingVar.TripPerPage);
             OnPropertyChanged("TripsToShow");
+        }
+        public void GotoDetailPage(object o)
+        {
+            viewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(o.ToString()), viewModel);
         }
     }
 }

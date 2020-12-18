@@ -26,7 +26,7 @@ namespace We_Split_WPF.Command
         {
             if (parameter.ToString() == "SearchPage")
             {
-                ViewModel.SelectedViewModel = new SearchPageViewModel();
+                ViewModel.SelectedViewModel = new SearchPageViewModel(ViewModel);
             }
             if (parameter.ToString() == "HomePage")
             {
