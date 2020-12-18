@@ -255,8 +255,11 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG THU</TextBlock>
                                     <Grid Grid.Row="1">
-                                        <lvc:PieChart Series="{Binding ChartSeries}"   LegendLocation="Bottom">
-                                      
+                                        <lvc:PieChart>
+                                            <lvc:PieChart.Series>
+                                                <lvc:PieSeries></lvc:PieSeries>
+                                                <lvc:PieSeries></lvc:PieSeries>
+                                            </lvc:PieChart.Series>
 
                                         </lvc:PieChart>
                                     </Grid>
@@ -299,7 +302,7 @@
                                                 <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
 
                                                 <DataGridTextColumn Header="SÔ TIỀN ĐÃ ĐÓNG" Binding="{Binding MoneyPaid }" />
-                                                <DataGridTextColumn Header="CÒN LẠI" Binding="{Binding getBalance }" />
+                                                <DataGridTextColumn Header="CÒN LẠI" Binding="{Binding RemainMoney }" />
 
 
                                             </DataGrid.Columns>

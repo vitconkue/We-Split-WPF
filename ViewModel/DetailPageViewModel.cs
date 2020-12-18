@@ -81,6 +81,10 @@ namespace We_Split_WPF.ViewModel
             {
                 
             }
+            foreach(var member in Trip.memberList)
+            {
+                member.RemainMoney = (member.MoneyPaid - Trip.SumExpenses / Trip.memberList.Count());
+            }
 
         }
         public void AddPlaceImageForTrip()
