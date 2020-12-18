@@ -18,11 +18,7 @@ namespace We_Split_WPF.Model
             return MoneyPaid - currentTripExpense / numberOfMember;
         }
 
-        public int getBalance(int currentTripExpense, int numberOfMember)
-        {
-            return MoneyPaid - currentTripExpense/numberOfMember;
-        }
-
+       
         public void ShowConsole()
         {
             Console.WriteLine($"Member ID: {ID},Member Name: {Name},  Money Paid: {MoneyPaid}");

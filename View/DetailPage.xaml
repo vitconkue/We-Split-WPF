@@ -255,13 +255,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG THU</TextBlock>
                                     <Grid Grid.Row="1">
-                                        <lvc:PieChart>
-                                            <lvc:PieChart.Series>
-                                                <lvc:PieSeries></lvc:PieSeries>
-                                                <lvc:PieSeries></lvc:PieSeries>
-                                            </lvc:PieChart.Series>
-
-                                        </lvc:PieChart>
+                                       
                                     </Grid>
 
                                 </Grid>
@@ -272,19 +266,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG CHI</TextBlock>
                                     <Grid Grid.Row="1">
-                                        <lvc:PieChart LegendLocation="Bottom">
-                                            <lvc:PieChart.Series >
-                                                <lvc:PieSeries Values="10" Title="Ăn">
-
-                                                </lvc:PieSeries>
-                                                <lvc:PieSeries Values="20" Title="Ngủ">
-
-                                                </lvc:PieSeries >
-                                                <lvc:PieSeries Values="30" Title="Nghỉ">
-
-                                                </lvc:PieSeries>
-                                            </lvc:PieChart.Series>
-                                        </lvc:PieChart>
+                                        
                                     </Grid>
 
                                 </Grid>

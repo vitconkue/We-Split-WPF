@@ -22,6 +22,7 @@ namespace We_Split_WPF.Command
 
         public bool CanExecute(object parameter)
         {
+              
                 return true;
            
         }

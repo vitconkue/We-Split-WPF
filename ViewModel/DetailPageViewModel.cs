@@ -13,6 +13,7 @@ using We_Split_WPF.Command;
 using We_Split_WPF.Model;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System.ComponentModel;
 
 namespace We_Split_WPF.ViewModel
 {
@@ -40,6 +41,18 @@ namespace We_Split_WPF.ViewModel
                 OnPropertyChanged(nameof(CurrentStringDisplay));
             }
         }
+
+        public bool IsInDesignMode
+        {
+            get
+            {
+                var prop = DesignerProperties.IsInDesignModeProperty;
+                return (bool)DependencyPropertyDescriptor
+                    .FromProperty(prop, typeof(FrameworkElement))
+                    .Metadata.DefaultValue;
+            }
+        }
+
         public Uri PlaceImageDisplay
         {
             get
@@ -57,34 +70,38 @@ namespace We_Split_WPF.ViewModel
         public List<Uri> PlaceImages { get; set; }
         public DetailPageViewModel(int ID, MainViewModel param)
         {
-            Trip = DatabaseAccess.LoadSingleTrip(ID);
-            Trip.Name = Trip.Name.ToUpper();
-            this.viewModel = param;
-            UpdateTrip = new UpdateTripCommand(viewModel, ID);
-            AddPlaceImage = new RelayCommand(o => AddPlaceImageForTrip());
-            PrevClick = new RelayCommand(o => PrevButtonClick());
-            NextClick = new RelayCommand(o => NextButtonClick());
-            EndTrip= new RelayCommand(o => EndTripClick());
-            ChartSeries = new PieSeries();
-                    
-            ChartSeries.Title = "Test";
-               
-            try
+            if(!IsInDesignMode)
             {
-                PlaceImages = Trip.PlaceImages;
-                PlaceImageDisplay = PlaceImages[0];
-                TotalPlaceImage = PlaceImages.Count();
-                CurrentPlaceImage = 1;
-                CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
+                Trip = DatabaseAccess.LoadSingleTrip(ID);
+                Trip.Name = Trip.Name.ToUpper();
+                this.viewModel = param;
+                UpdateTrip = new UpdateTripCommand(viewModel, ID);
+                AddPlaceImage = new RelayCommand(o => AddPlaceImageForTrip());
+                PrevClick = new RelayCommand(o => PrevButtonClick());
+                NextClick = new RelayCommand(o => NextButtonClick());
+                EndTrip = new RelayCommand(o => EndTripClick());
+                ChartSeries = new PieSeries();
+
+                ChartSeries.Title = "Test";
+
+                try
+                {
+                    PlaceImages = Trip.PlaceImages;
+                    PlaceImageDisplay = PlaceImages[0];
+                    TotalPlaceImage = PlaceImages.Count();
+                    CurrentPlaceImage = 1;
+                    CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
+                }
+                catch
+                {
+
+                }
+                foreach (var member in Trip.memberList)
+                {
+                    member.RemainMoney = (member.MoneyPaid - Trip.SumExpenses / Trip.memberList.Count());
+                }
             }
-            catch
-            {
-                
-            }
-            foreach(var member in Trip.memberList)
-            {
-                member.RemainMoney = (member.MoneyPaid - Trip.SumExpenses / Trip.memberList.Count());
-            }
+            
 
         }
         public void AddPlaceImageForTrip()
