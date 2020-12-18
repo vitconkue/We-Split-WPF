@@ -87,7 +87,7 @@
 											<DatePicker SelectedDate="{Binding PlaceDSData}"  x:Name="placeDateStart" Width="260" materialDesign:HintAssist.Hint="Ngày khởi hành" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="20"/>
 											<DatePicker SelectedDate="{Binding PlaceDFData}"  x:Name="placeDateFinish" Width="260" materialDesign:HintAssist.Hint="Ngày kết thúc" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="20"/>
 										</StackPanel>
-										<Button Command="{Binding addPlaceButtonCommand}" x:Name="AddPlaceButton"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM"/>
+										<Button Command="{Binding addPlaceButtonCommand}" x:Name="AddPlaceButton"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Thêm một điểm dừng" Content="_THÊM"/>
 										<Grid Margin="10">
 											<DataGrid IsReadOnly="True" ItemsSource="{Binding PlaceList, Mode=OneWay}" x:Name="PlaceDataGrid" AutoGenerateColumns="False" Height="200">
 												<DataGrid.Columns>
@@ -123,7 +123,7 @@
 												
 											</ComboBox>
 											<TextBox Text="{Binding MemberMoneyData}" PreviewTextInput="MemberMoney_PreviewTextInput" materialDesign:HintAssist.Hint="Sồ tiền đóng góp" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200" ></TextBox>
-											<Button Command="{Binding addMemberButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
+											<Button Command="{Binding addMemberButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Thêm một thành viên" Content="_THÊM" Margin="20"/>
 											
 										</StackPanel>
 										<Grid Margin="10">
@@ -150,7 +150,7 @@
 										<StackPanel Orientation="Vertical" Margin="20">
 											<TextBox Text="{Binding ExpensesNameData}" materialDesign:HintAssist.Hint="Nội dung" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
 											<TextBox Text="{Binding ExpensesMoneyData}" PreviewTextInput="ExpensesMoney_PreviewTextInput" materialDesign:HintAssist.Hint="Sồ tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
-											<Button Command="{Binding addExpensesButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
+											<Button Command="{Binding addExpensesButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Một một khoảng chi" Content="_THÊM" Margin="20"/>
 										</StackPanel>
 										<Grid Margin="10">
 											<DataGrid IsReadOnly="True" ItemsSource="{Binding ExpensesList}" Name="ExpenseDataGrid" AutoGenerateColumns="False" Height="180" Width="300" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Auto">
@@ -175,7 +175,7 @@
 										<ColumnDefinition Width="1*" />
 									</Grid.ColumnDefinitions>
 									<StackPanel Grid.Column="0">
-										<Button  Command="{Binding addImageButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Width="150" Height="45">
+										<Button  Command="{Binding addImageButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="Thêm ảnh nền chuyến đi" Width="150" Height="45">
 											<TextBlock Text="THÊM HÌNH ẢNH" />
 										</Button>
 										<materialDesign:Card Margin="30,0,0,0">
@@ -184,7 +184,7 @@
 										</materialDesign:Card>
 									</StackPanel>
 									<StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,150,0">
-										<Button  Command="{Binding doneButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="MaterialDesignRaisedDarkButton with Round Corners" Width="125" Height="45">
+										<Button  Command="{Binding doneButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="Hoàn thành và Lưu" Width="125" Height="45">
 											<TextBlock Text="HOÀN THÀNH" />
 										</Button>
 									</StackPanel>
