@@ -104,7 +104,7 @@ namespace We_Split_WPF.ViewModel
             addNewButtonCommand = new RelayCommand(o => addNewButtonClick());
             MainViewModel = param;
             UpdateHomeView = new UpdateHomeViewCommand(MainViewModel);
-            tripPerPage = 1;
+            tripPerPage = 8;
 
             NextPage = new NextPageHomeCommand(this);
             PreviousPage = new PreviousPageHomeCommand(this);
@@ -121,7 +121,7 @@ namespace We_Split_WPF.ViewModel
         }
         public void addNewButtonClick()
         {
-            MainViewModel.SelectedViewModel = new AddNewTripPageViewModel();
+            MainViewModel.SelectedViewModel = new AddNewTripPageViewModel(MainViewModel);
         }
     }
 }

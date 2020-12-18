@@ -77,5 +77,19 @@ namespace We_Split_WPF.Helper
 
             return result;
         }
+        public static bool isNumericString(string input_string)
+        {
+            bool result = true;
+            for (int i = 0; i < input_string.Length; i++)
+            {
+                if (input_string[i] < '0' || input_string[i] > '9')
+                {
+                    result = false;
+                }
+            }
+            return result;
+        }
+
+
     }
 }

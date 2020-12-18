@@ -80,6 +80,7 @@ namespace We_Split_WPF.ViewModel
         public ICommand addImageButtonCommand { get; set; }
         public MainViewModel MainViewModel;
 
+
         ///  Biến Binding
         ///  
         private string _tripName;
@@ -236,7 +237,7 @@ namespace We_Split_WPF.ViewModel
         }
 
         /// 
-        public AddNewTripPageViewModel()
+        public AddNewTripPageViewModel(MainViewModel param)
         {
             AllMember = new ObservableCollection<MemberModel>();
             List<MemberModel> tempList = DatabaseAccess.LoadAllMember();
@@ -254,6 +255,7 @@ namespace We_Split_WPF.ViewModel
             ExpensesList = new ObservableCollection<ExpenseModel>();
             PlaceDSData = DateTime.Now;
             PlaceDFData = DateTime.Now;
+            MainViewModel = param;
         }
 
         private void addPlaceButtonClick()
@@ -284,10 +286,18 @@ namespace We_Split_WPF.ViewModel
 
         private void addMemberButtonClick()
         {
-            if(MemberNameData!=null && MemberMoneyData!=null)
+            if(MemberNameData!=null && MemberMoneyData!=null && Helper.HelperFunctions.isNumericString(MemberMoneyData)==true)
             {
                 MemberInTripModel temp = new MemberInTripModel();
-                temp.ID = MemberID;
+                if(MemberID == -1)
+                {
+                    temp.ID = -1;
+                }
+                else
+                {
+                    temp.ID = AllMember[MemberID].ID;
+                }
+                
                 temp.Name = MemberNameData;
                 if (MemberMoneyData != null)
                 {
@@ -302,6 +312,10 @@ namespace We_Split_WPF.ViewModel
                 {
                     AllMember.RemoveAt(MemberID);
                 }
+            }
+            else if(Helper.HelperFunctions.isNumericString(MemberMoneyData) == false)
+            {
+                MessageBox.Show("Số tiền chỉ nhận giá trị số");
             }
             else
             {
@@ -318,7 +332,7 @@ namespace We_Split_WPF.ViewModel
 
         private void addExpensesButtonClick()
         {
-            if (ExpensesNameData != null && ExpensesMoneyData!=null)
+            if (ExpensesNameData != null && ExpensesMoneyData!=null && Helper.HelperFunctions.isNumericString(ExpensesMoneyData) == true)
             {
                 ExpenseModel temp = new ExpenseModel();
                 temp.Name = ExpensesNameData;
@@ -332,6 +346,10 @@ namespace We_Split_WPF.ViewModel
                 }
                 ExpensesList.Add(temp);
             }
+            else if (Helper.HelperFunctions.isNumericString(ExpensesMoneyData) == false)
+            {
+                MessageBox.Show("Số tiền chỉ nhận giá trị số");
+            }
             else
             {
                 MessageBox.Show("Vui lòng nhập đủ thông tin trước khi thêm!!!");
@@ -339,13 +357,68 @@ namespace We_Split_WPF.ViewModel
             ExpensesNameData = null;
             ExpensesMoneyData = null;
             OnPropertyChanged(nameof(ExpensesList));
-            OnPropertyChanged(nameof(ExpensesNameData));
             OnPropertyChanged(nameof(ExpensesMoneyData));
+            OnPropertyChanged(nameof(ExpensesNameData));
+            
         }
 
         private void doneButtonClick()
         {
-            
+            if(TripName==null)
+            {
+                MessageBox.Show("Tên chuyến đi rỗng!!!");
+            }
+            else if(ImageSource==null)
+            {
+                MessageBox.Show("Image is empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                List<MemberInTripModel> tempMember = new List<MemberInTripModel>();
+                List<PlaceModel> tempPlace = new List<PlaceModel>();
+                List<ExpenseModel> tempExpenses = new List<ExpenseModel>();
+                for (int i = 0; i < MemberList.Count(); i++)
+                {
+                    tempMember.Add(MemberList[i]);
+                }
+                for (int i = 0; i < PlaceList.Count(); i++)
+                {
+                    tempPlace.Add(PlaceList[i]);
+                }
+                for (int i = 0; i < ExpensesList.Count(); i++)
+                {
+                    tempExpenses.Add(ExpensesList[i]);
+                }
+                TripModel newTrip = DatabaseAccess.AddNewTrip(TripName, tempMember, tempExpenses, tempPlace);
+                //Thêm hình
+                if (ImageSource == null)
+                {
+                    ImageSource = "";
+                }
+                var directory = AppDomain.CurrentDomain.BaseDirectory;
+                var locationDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                directory += "Data\\Images\\TripsImage\\" + newTrip.ID + "\\Main";
+                locationDirectory += "Data\\Images\\TripsImage\\" + newTrip.ID + "\\Location";
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                if(!Directory.Exists(locationDirectory))
+                {
+                    Directory.CreateDirectory(locationDirectory);
+                }
+                string fileName = "main.png";
+                string sourcePath = ImageSource;
+                string targetPath = directory;
+                //Combine file và đường dẫn
+                string sourceFile = System.IO.Path.Combine(sourcePath, "");
+                string destFile = System.IO.Path.Combine(targetPath, fileName);
+                //Copy file từ file nguồn đến file đích
+                System.IO.File.Copy(sourceFile, destFile, true);
+                MessageBox.Show("Thêm chuyến đi mới thành công!!!");
+                ICommand BackToHomePage = new UpdateMainViewCommand(MainViewModel);
+                BackToHomePage.Execute((object)"HomePage");
+            }
         }
 
         private void addImageButtonClick()
