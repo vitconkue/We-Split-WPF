@@ -259,42 +259,100 @@ namespace We_Split_WPF.Model
             return currrentPlaceNumber + 1; 
         }
         // Search with keyword (name only) 
-        public static List<TripModel> SearchByTripName(string searchKey)
+        //public static List<TripModel> SearchByTripName(string searchKey)
+        //{
+        //    List<TripModel> result = new List<TripModel>();
+
+        //    Dictionary<int, string> IdNamePairs = new Dictionary<int, string>();
+
+        //    using (var cnn = new SQLiteConnection(LoadConnectionString()))
+        //    {
+        //        // Load ID- name pair
+        //        string IdNamePairSQLString = "SELECT ID,Name FROM TRIP";
+        //        var outputPair = cnn.Query(IdNamePairSQLString, new DynamicParameters())
+        //            .ToDictionary(row => (int)row.ID, row => (string)row.Name);
+
+        //        IdNamePairs = outputPair;
+        //    }
+        //    //search in the pair 
+        //    var filtered = IdNamePairs
+        //        .Where(r => r.Value.ToLower().Contains(searchKey.ToLower()) ||
+        //            HelperFunctions.RemovedUTF(r.Value.ToLower()).Contains(HelperFunctions.RemovedUTF(searchKey.ToLower())))
+        //        .ToDictionary(r => r.Key, r => r.Value);
+
+        //    filtered.OrderByDescending(r => HelperFunctions.rateSearchResult(searchKey, r.Value));
+        //    // Load the trips
+        //    foreach (var keyValuePair in filtered)
+        //    {
+        //        result.Add(LoadSingleTrip(keyValuePair.Key));
+        //    }
+
+        //    return result;
+
+
+        //}
+
+        public static List<TripModel> SearchByPlaceAndTripName(string keyword)
         {
             List<TripModel> result = new List<TripModel>();
-
-            Dictionary<int, string> IdNamePairs = new Dictionary<int, string>();
-
+            List<int> alreadyAdded = new List<int>();
+            List<(int, string)> keyValuePairs = new List<(int, string)>();
+            // a TripID - Tripname
             using (var cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                // Load ID- name pair
-                string IdNamePairSQLString = "SELECT ID,Name FROM TRIP";
-                var outputPair = cnn.Query(IdNamePairSQLString, new DynamicParameters())
-                    .ToDictionary(row => (int)row.ID, row => (string)row.Name);
-
-                IdNamePairs = outputPair;
+                string keyValuePairSqlString = "select ID,Name from TRIP";
+                var outputPairs = cnn.Query<(int, string)>(keyValuePairSqlString, new DynamicParameters());
+                keyValuePairs = outputPairs.ToList();
             }
-            //search in the pair 
-            var filtered = IdNamePairs
-                .Where(r => r.Value.ToLower().Contains(searchKey.ToLower()) ||
-                    HelperFunctions.RemovedUTF(r.Value.ToLower()).Contains(HelperFunctions.RemovedUTF(searchKey.ToLower())))
-                .ToDictionary(r => r.Key, r => r.Value);
+            var filteredTripName = keyValuePairs
+              .Where(r => r.Item2.ToLower().Contains(keyword.ToLower()) ||
+                  HelperFunctions.RemovedUTF(r.Item2.ToLower()).Contains(HelperFunctions.RemovedUTF(keyword.ToLower()))).ToList();
 
-            filtered.OrderByDescending(r => HelperFunctions.rateSearchResult(searchKey, r.Value));
-            // Load the trips
-            foreach (var keyValuePair in filtered)
+            filteredTripName = filteredTripName.OrderByDescending(r => HelperFunctions.rateSearchResult(keyword, r.Item2)).ToList();
+            
+            foreach (var pair in filteredTripName)
             {
-                result.Add(LoadSingleTrip(keyValuePair.Key));
+                if (!alreadyAdded.Contains(pair.Item1))
+                {
+                    result.Add(LoadSingleTrip(pair.Item1));
+                    alreadyAdded.Add(pair.Item1);
+                }
             }
 
+            // search by place
+            using (var cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string keyValuePairSqlString = "select TripID,Name from Place";
+                var outputPairs = cnn.Query<(int, string)>(keyValuePairSqlString, new DynamicParameters());
+                keyValuePairs = outputPairs.ToList();
+
+            }
+
+
+            var filteredPlace = keyValuePairs
+                .Where(r => r.Item2.ToLower().Contains(keyword.ToLower()) ||
+                    HelperFunctions.RemovedUTF(r.Item2.ToLower()).Contains(HelperFunctions.RemovedUTF(keyword.ToLower()))).ToList();
+
+            filteredPlace = filteredPlace.OrderByDescending(r => HelperFunctions.rateSearchResult(keyword, r.Item2)).ToList();
+
+            // Load the trips
+
+            foreach (var pair in filteredPlace)
+            {
+                if (!alreadyAdded.Contains(pair.Item1))
+                {
+                    result.Add(LoadSingleTrip(pair.Item1));
+                    alreadyAdded.Add(pair.Item1);
+                }
+            }
             return result;
-
-
         }
+
 
         public static List<TripModel> SearchByMemberName(string keyword)
         {
             List<TripModel> result = new List<TripModel>();
+            List<int> alreadyAdded = new List<int>();
             // a Trip ID - memberName dictionary 
             List<(int, string)> keyValuePairs = new List<(int, string)>();
 
@@ -303,7 +361,7 @@ namespace We_Split_WPF.Model
                 string keyValuePairSqlString = "select TripID,Name from member join memberjointrip on member.ID = memberjointrip.MemberID";
                 var outputPairs = cnn.Query<(int, string)>(keyValuePairSqlString, new DynamicParameters());
                 keyValuePairs = outputPairs.ToList();
-                Debug.Write("rgrgrg");
+             
             }
 
 
@@ -314,7 +372,7 @@ namespace We_Split_WPF.Model
             filtered = filtered.OrderByDescending(r => HelperFunctions.rateSearchResult(keyword, r.Item2)).ToList();
 
             // Load the trips
-            List<int> alreadyAdded = new List<int>();
+           
             foreach (var pair in filtered)
             {
                 if (!alreadyAdded.Contains(pair.Item1))
@@ -327,12 +385,12 @@ namespace We_Split_WPF.Model
             return result;
         }
 
-        public static int SearchResultCount(string searchKey, bool isSearchByTripName)
+        public static int SearchResultCount(string searchKey, bool isSearchByTripNameAndPlace)
         {
             int result = 0;
-            if (isSearchByTripName)
+            if (isSearchByTripNameAndPlace)
             {
-                result = SearchByTripName(searchKey).Count;
+                result = SearchByPlaceAndTripName(searchKey).Count;
             }
             else
             {
@@ -345,12 +403,12 @@ namespace We_Split_WPF.Model
         #region Paging opration
         // for search page
             // Get search result with page
-        public static List<TripModel> GetSearchResultWithPage(string searckey, bool isSearchByTripName, int pageNumber, int tripPerPage)
+        public static List<TripModel> GetSearchResultWithPage(string searckey, bool isSearchByTripNameAndPlace, int pageNumber, int tripPerPage)
         {
             List<TripModel> searchResult = new List<TripModel>(); 
-            if(isSearchByTripName)
+            if(isSearchByTripNameAndPlace)
             {
-                searchResult = SearchByTripName(searckey); 
+                searchResult = SearchByPlaceAndTripName(searckey); 
             }
             else
             {

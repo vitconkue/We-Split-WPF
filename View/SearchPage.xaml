@@ -67,7 +67,7 @@
             <Grid.Background>
                 <ImageBrush ImageSource="../Data/Images/g.png"></ImageBrush>
             </Grid.Background>
-            <StackPanel Width="600" Grid.Row="0">
+            <StackPanel Width="800" Grid.Row="0">
                 <materialDesign:PackIcon Margin="0 0 10 0" Foreground="Black" Width="30" Kind="Search" Height="64"/>
                 <TextBox x:Name="SearchInput"  materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" FontSize="14" Height="30" Width="300">
                     <TextBox.InputBindings>
@@ -87,7 +87,7 @@
                     <CheckBox.Resources>
 
                         <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#0099FF"/>
-                    </CheckBox.Resources> TÊN CHUYẾN ĐI
+                    </CheckBox.Resources> TÊN CHUYẾN ĐI/ĐỊA ĐIỂM
                 </CheckBox>
                 <CheckBox Checked="MemberName_Checked" x:Name="MemberName" Margin="10 0">
                     <CheckBox.Resources>
@@ -125,7 +125,7 @@
                                     </StackPanel>
                                     <Border BorderThickness="0 0.6 0 0" BorderBrush="#0099FF">
                                         <StackPanel Margin="0 5 0 0"  Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
-                                            <Button Background="Green"  Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}">
+                                            <Button Background="Green"  Command="{Binding DataContext.UpdateSearchView, ElementName=TripListView }" CommandParameter="{Binding ID}">
                                                 <materialDesign:PackIcon Kind="Eye"></materialDesign:PackIcon>
                                             </Button>
                                             <Button Background="red" Margin="10 0 10 0"  Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}">
