@@ -122,7 +122,7 @@
 											<ComboBox Text="{Binding MemberNameData}" x:Name="memberComboBox" ItemsSource="{Binding AllMember}" DisplayMemberPath="Name" SelectedIndex="{Binding MemberID}" materialDesign:HintAssist.Hint="Thành viên tham gia" materialDesign:HintAssist.HintOpacity=".26" IsEditable="True">
 												
 											</ComboBox>
-											<TextBox Text="{Binding MemberMoneyData}" materialDesign:HintAssist.Hint="Sồ tiền đóng góp" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200" ></TextBox>
+											<TextBox Text="{Binding MemberMoneyData}" PreviewTextInput="MemberMoney_PreviewTextInput" materialDesign:HintAssist.Hint="Sồ tiền đóng góp" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200" ></TextBox>
 											<Button Command="{Binding addMemberButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
 											
 										</StackPanel>
@@ -149,7 +149,7 @@
 									<StackPanel Orientation="Horizontal">
 										<StackPanel Orientation="Vertical" Margin="20">
 											<TextBox Text="{Binding ExpensesNameData}" materialDesign:HintAssist.Hint="Nội dung" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
-											<TextBox Text="{Binding ExpensesMoneyData}" materialDesign:HintAssist.Hint="Sồ tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
+											<TextBox Text="{Binding ExpensesMoneyData}" PreviewTextInput="ExpensesMoney_PreviewTextInput" materialDesign:HintAssist.Hint="Sồ tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  Width="200"></TextBox>
 											<Button Command="{Binding addExpensesButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="120" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="_THÊM" Margin="20"/>
 										</StackPanel>
 										<Grid Margin="10">
