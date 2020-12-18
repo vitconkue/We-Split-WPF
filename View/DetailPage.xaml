@@ -16,7 +16,7 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
                d:DesignHeight="750" d:DesignWidth="1350"
-     >
+    >
 
     <UserControl.Resources>
         <Style TargetType="TextBox">
@@ -88,6 +88,9 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Status, StringFormat={}TRẠNG THÁI: {0}}" Margin="20 0 0 0 " FontSize="15" Style="{DynamicResource Title}"></TextBlock>
+                    </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Margin="0 0 50 0">
                         <Button Command="{Binding EndTrip}" Margin="0 0 10 0">
                             <StackPanel>
@@ -117,7 +120,7 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <materialDesign:Card Margin ="50 0 0 0" Grid.Row="0">
+                        <materialDesign:Card Margin ="10 0 0 0" Grid.Row="0">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
@@ -133,7 +136,7 @@
 
                             </Grid>
                         </materialDesign:Card>
-                        <materialDesign:Card Margin="50 10 0 10" Grid.Row="1">
+                        <materialDesign:Card Margin="10 10 0 10" Grid.Row="1">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"></RowDefinition>
@@ -167,7 +170,7 @@
                             </RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <materialDesign:Card Margin="50 0 50 0" Grid.Row="0" Grid.ColumnSpan="2">
+                        <materialDesign:Card Margin="10 0 10 0" Grid.Row="0" Grid.ColumnSpan="2">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
@@ -236,62 +239,77 @@
                                 </Grid>
                             </Grid>
                         </materialDesign:Card>
-                        <materialDesign:Card Grid.Row="1" Margin="50,10.4" Grid.ColumnSpan="2">
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition>
+                        <materialDesign:Card Grid.Row="1" Margin="10" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition>
 
-                                    </ColumnDefinition>
-                                    <ColumnDefinition>
+                                    </RowDefinition>
+                                    <RowDefinition Height="10*">
 
-                                    </ColumnDefinition>
-                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    </RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock  Style="{DynamicResource Title}" HorizontalAlignment="Center" Padding="0 15" Grid.Row="0">THỐNG KÊ CHI TIÊU</TextBlock>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition>
 
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition Height="10*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG THU</TextBlock>
-                                    <Grid Grid.Row="1">
-                                       
+                                        </ColumnDefinition>
+                                        <ColumnDefinition>
+
+                                        </ColumnDefinition>
+                                        <ColumnDefinition Width="1.8*"></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="10*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG THU</TextBlock>
+                                        <Grid Grid.Row="1">
+                                            <lvc:PieChart  Width="200" Series="{Binding RecieveMoneyChartData}">
+
+                                            </lvc:PieChart>
+                                        </Grid>
+
                                     </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="10*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG CHI</TextBlock>
+                                        <Grid Grid.Row="1">
+                                            <lvc:PieChart Width="200" Series="{Binding ExpenseMoneyChartData}">
 
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition Height="10*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG CHI</TextBlock>
-                                    <Grid Grid.Row="1">
-                                        
+                                            </lvc:PieChart>
+                                        </Grid>
+
                                     </Grid>
-
-                                </Grid>
-                                <Grid Grid.Column="2">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition Height="10*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG THU</TextBlock>
-                                    <Grid Grid.Row="1">
-                                        <DataGrid IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
-                                            <DataGrid.Columns>
+                                    <Grid Grid.Column="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="10*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center" Grid.Row="0">TỔNG KẾT</TextBlock>
+                                        <Grid Grid.Row="1">
+                                            <DataGrid IsReadOnly="True" ItemsSource="{Binding Trip.memberList}" AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
 
 
-                                                <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
+                                                    <DataGridTextColumn Header="TÊN" Binding="{Binding Name}" />
 
-                                                <DataGridTextColumn Header="SÔ TIỀN ĐÃ ĐÓNG" Binding="{Binding MoneyPaid }" />
-                                                <DataGridTextColumn Header="CÒN LẠI" Binding="{Binding RemainMoney }" />
+                                                    <DataGridTextColumn Header="SÔ TIỀN ĐÃ ĐÓNG" Binding="{Binding MoneyPaid }" />
+                                                    <DataGridTextColumn Header="CÒN LẠI" Binding="{Binding RemainMoney }" />
 
 
-                                            </DataGrid.Columns>
+                                                </DataGrid.Columns>
 
-                                        </DataGrid>
+                                            </DataGrid>
+                                        </Grid>
+
                                     </Grid>
-
                                 </Grid>
                             </Grid>
                         </materialDesign:Card>

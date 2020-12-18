@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LiveCharts;
-using LiveCharts.Wpf;
 
 namespace We_Split_WPF.View
 {
     /// <summary>
-    /// Interaction logic for DetailPage.xaml
+    /// Interaction logic for SplashScreen.xaml
     /// </summary>
-    public partial class DetailPage : UserControl
+    public partial class SplashScreen : Window
     {
-        public DetailPage()
+        public SplashScreen()
         {
             InitializeComponent();
-           
         }
-
-       
     }
 }

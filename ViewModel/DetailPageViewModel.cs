@@ -26,9 +26,12 @@ namespace We_Split_WPF.ViewModel
         public ICommand PrevClick { get; set; }
         public ICommand NextClick { get; set; }
         public ICommand EndTrip { get; set; }
-        public Series ChartSeries { get; set; }
+        public string Status { get; set; }
+        public SeriesCollection RecieveMoneyChartData { get; set; }
+        public SeriesCollection ExpenseMoneyChartData { get; set; }
         private Uri _placeImageDisplay;
         private string _currentStringDisplay = "0 OF 0";
+        public int test = 3;
         public string CurrentStringDisplay
         {
             get
@@ -42,16 +45,7 @@ namespace We_Split_WPF.ViewModel
             }
         }
 
-        public bool IsInDesignMode
-        {
-            get
-            {
-                var prop = DesignerProperties.IsInDesignModeProperty;
-                return (bool)DependencyPropertyDescriptor
-                    .FromProperty(prop, typeof(FrameworkElement))
-                    .Metadata.DefaultValue;
-            }
-        }
+
 
         public Uri PlaceImageDisplay
         {
@@ -65,43 +59,31 @@ namespace We_Split_WPF.ViewModel
                 OnPropertyChanged(nameof(PlaceImageDisplay));
             }
         }
-        public int CurrentPlaceImage{get; set;}
-        public int TotalPlaceImage{ get; set;}
+        public int CurrentPlaceImage { get; set; }
+        public int TotalPlaceImage { get; set; }
         public List<Uri> PlaceImages { get; set; }
         public DetailPageViewModel(int ID, MainViewModel param)
         {
-            if(!IsInDesignMode)
+
+            Trip = DatabaseAccess.LoadSingleTrip(ID);
+            Trip.Name = Trip.Name.ToUpper();
+            this.viewModel = param;
+            UpdateTrip = new UpdateTripCommand(viewModel, ID);
+            AddPlaceImage = new RelayCommand(o => AddPlaceImageForTrip());
+            PrevClick = new RelayCommand(o => PrevButtonClick());
+            NextClick = new RelayCommand(o => NextButtonClick());
+            EndTrip = new RelayCommand(o => EndTripClick());
+            InitPlaceImage();
+            CalcRemainMoney();
+            InitChart();
+            if (Trip.IsFinished)
             {
-                Trip = DatabaseAccess.LoadSingleTrip(ID);
-                Trip.Name = Trip.Name.ToUpper();
-                this.viewModel = param;
-                UpdateTrip = new UpdateTripCommand(viewModel, ID);
-                AddPlaceImage = new RelayCommand(o => AddPlaceImageForTrip());
-                PrevClick = new RelayCommand(o => PrevButtonClick());
-                NextClick = new RelayCommand(o => NextButtonClick());
-                EndTrip = new RelayCommand(o => EndTripClick());
-                ChartSeries = new PieSeries();
-
-                ChartSeries.Title = "Test";
-
-                try
-                {
-                    PlaceImages = Trip.PlaceImages;
-                    PlaceImageDisplay = PlaceImages[0];
-                    TotalPlaceImage = PlaceImages.Count();
-                    CurrentPlaceImage = 1;
-                    CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
-                }
-                catch
-                {
-
-                }
-                foreach (var member in Trip.memberList)
-                {
-                    member.RemainMoney = (member.MoneyPaid - Trip.SumExpenses / Trip.memberList.Count());
-                }
+                Status = "ĐÃ KẾT THÚC";
             }
-            
+            else
+            {
+                Status = "ĐANG ĐI";
+            }
 
         }
         public void AddPlaceImageForTrip()
@@ -119,14 +101,14 @@ namespace We_Split_WPF.ViewModel
                     allImageSource = openFileDialog.FileNames;
                 }
                 string file = AppDomain.CurrentDomain.BaseDirectory;
-               
+
                 foreach (string source in allImageSource)
                 {
                     var tokens1 = source.Split(new string[] { "\\" }, StringSplitOptions.None);
                     string filename = tokens1[tokens1.Length - 1];
                     string dest = $"{file}Data\\Images\\TripsImage\\{Trip.ID}\\Location\\";
                     var tokens2 = filename.Split(new string[] { "." }, StringSplitOptions.None);
-                    string filetype= tokens2[tokens2.Length - 1];
+                    string filetype = tokens2[tokens2.Length - 1];
                     filename = $"image{PlaceImages.Count() + 1}.{filetype}";
                     dest += filename;
                     PlaceImages.Add(new Uri(dest));
@@ -140,7 +122,7 @@ namespace We_Split_WPF.ViewModel
             }
             catch
             {
-                
+
             }
         }
         public void PrevButtonClick()
@@ -150,7 +132,7 @@ namespace We_Split_WPF.ViewModel
                 if (CurrentPlaceImage > 1)
                 {
                     CurrentPlaceImage--;
-                    PlaceImageDisplay = PlaceImages[CurrentPlaceImage-1];
+                    PlaceImageDisplay = PlaceImages[CurrentPlaceImage - 1];
                     CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
                     OnPropertyChanged(nameof(PlaceImageDisplay));
                 }
@@ -201,7 +183,57 @@ namespace We_Split_WPF.ViewModel
                     //do something else
                 }
             }
-           
+
         }
+        private void InitPlaceImage()
+        {
+            try
+            {
+                PlaceImages = Trip.PlaceImages;
+                PlaceImageDisplay = PlaceImages[0];
+                TotalPlaceImage = PlaceImages.Count();
+                CurrentPlaceImage = 1;
+                CurrentStringDisplay = $"{CurrentPlaceImage} OF {TotalPlaceImage}";
+            }
+            catch
+            {
+
+            }
+        }
+        private void CalcRemainMoney()
+        {
+            foreach (var member in Trip.memberList)
+            {
+                member.RemainMoney = (member.MoneyPaid - Trip.SumExpenses / Trip.memberList.Count());
+            }
+
+        }
+        private void InitChart()
+        {
+            RecieveMoneyChartData = new SeriesCollection { };
+            foreach (var member in Trip.memberList)
+            {
+                RecieveMoneyChartData.Add(
+                new PieSeries
+                {
+                    Title = member.Name,
+                    Values = new ChartValues<int> { member.MoneyPaid },
+                    DataLabels = true
+                }); ;
+            }
+
+            ExpenseMoneyChartData = new SeriesCollection { };
+            foreach (var expense in Trip.expensesList)
+            {
+                ExpenseMoneyChartData.Add(
+                new PieSeries
+                {
+                    Title = expense.Name,
+                    Values = new ChartValues<int> { expense.AmountMoney },
+                    DataLabels = true
+                });
+            }
+        }
+      
     }
 }

@@ -78,52 +78,52 @@
             <Setter Property="Margin" Value="10 0"></Setter>
         </Style>
     </UserControl.Resources>
-  
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+            <ComboBox SelectedIndex="{Binding CurrentFilter}" materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" Margin="100 0 0 0" Style="{DynamicResource MaterialDesignFloatingHintComboBox}" Width="200">
+                <ComboBoxItem IsSelected="True">
+                    TẤT CẢ
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    ĐANG ĐI
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    ĐÃ ĐI
+                </ComboBoxItem>
+            </ComboBox>
+            <Button Margin="100,0,0,0" Command="{Binding addNewButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="Thêm chuyến đi mới" Width="125" >
+                <TextBlock Text="THÊM" />
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="1">
+
 
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="10*"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0">
-                    <ComboBox SelectedIndex="{Binding CurrentFilter}" materialDesign:TextFieldAssist.UnderlineBrush="#0099FF" Margin="100 0 0 0" Style="{DynamicResource MaterialDesignFloatingHintComboBox}" Width="200">
-                        <ComboBoxItem IsSelected="True">
-                            TẤT CẢ
-                         </ComboBoxItem>
-                        <ComboBoxItem>
-                            ĐANG ĐI
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            ĐÃ ĐI
-                        </ComboBoxItem>
-                    </ComboBox>
-			<Button Margin="100,0,0,0" Command="{Binding addNewButtonCommand}" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="25" ToolTip="Thêm chuyến đi mới" Width="125" Height="45">
-				<TextBlock Text="THÊM" />
-			</Button>
-		</StackPanel>
-                <Grid Grid.Row="1">
-                
-                    
-                    <Grid>
 
 
-                            <Grid>
-                                <ListView ItemsSource="{Binding TripsToShow}" Name="TripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                    <ListView.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel />
-                                        </ItemsPanelTemplate>
-                                    </ListView.ItemsPanel>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <materialDesign:TransitioningContent>
-                                                <materialDesign:TransitioningContent.OpeningEffects>
-                                                    <materialDesign:TransitionEffect  Kind="SlideInFromRight"/>
-                                                </materialDesign:TransitioningContent.OpeningEffects>
+                <Grid HorizontalAlignment="Center">
+                    <ListView Margin="50 0 50 0" ItemsSource="{Binding TripsToShow}" Name="TripListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:TransitioningContent>
+                                    <materialDesign:TransitioningContent.OpeningEffects>
+                                        <materialDesign:TransitionEffect  Kind="SlideInFromRight"/>
+                                    </materialDesign:TransitioningContent.OpeningEffects>
                                     <Border Margin="5" BorderThickness="0.6" BorderBrush="#0099FF" CornerRadius="6">
                                         <StackPanel Margin="5">
-                                            <Border Width="250" Height="200">
+                                            <Border Width="220" Height="170">
                                                 <Border.Background >
                                                     <ImageBrush  ImageSource="{Binding ImageLink}"></ImageBrush>
                                                 </Border.Background>
@@ -132,16 +132,17 @@
 
                                                 <TextBlock FontSize="15" Margin="0 10 10 0" Text="{Binding Name}"></TextBlock>
 
-                                               
+
                                             </StackPanel>
                                             <Border BorderThickness="0 0.6 0 0" BorderBrush="#0099FF">
                                                 <StackPanel Margin="0 5 0 0"  Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
-                                                    <Button Background="Green"  Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}">
-                                                        <materialDesign:PackIcon Kind="Eye"></materialDesign:PackIcon></Button>
-                                                    <Button Background="red" Margin="10 0 10 0"  Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}">
+                                                    <Button ToolTip="Xem chi tiết" Background="Green"  Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}">
+                                                        <materialDesign:PackIcon Kind="Eye"></materialDesign:PackIcon>
+                                                    </Button>
+                                                    <Button ToolTip="Xóa chuyến đi" Background="red" Margin="10 0 10 0"  >
                                                         <materialDesign:PackIcon Kind="Delete"></materialDesign:PackIcon>
                                                     </Button>
-                                                    <Button  Command="{Binding DataContext.UpdateTripFromHome, ElementName=TripListView }" CommandParameter="{Binding ID}">
+                                                    <Button ToolTip="Cập nhật chuyến đi"  Command="{Binding DataContext.UpdateTripFromHome, ElementName=TripListView }" CommandParameter="{Binding ID}">
                                                         <materialDesign:PackIcon Kind="Update"></materialDesign:PackIcon>
                                                     </Button>
                                                 </StackPanel>
@@ -150,22 +151,22 @@
                                     </Border>
                                 </materialDesign:TransitioningContent>
 
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
 
-                                </ListView>
-                            </Grid>
-                      
-
-
-                    </Grid>
-
+                    </ListView>
                 </Grid>
-                <StackPanel HorizontalAlignment="Center" Grid.Row="2">
-                    <Button Command="{Binding PreviousPage}" CommandParameter="{Binding PagingVar}"  Height="35" >
-                        <materialDesign:PackIcon Kind="NavigateBefore"></materialDesign:PackIcon>
-                    </Button>
-                    <Border>
+
+
+
+            </Grid>
+
+        </Grid>
+        <StackPanel Margin="0 0 0 30" HorizontalAlignment="Center" Grid.Row="2">
+            <Button Command="{Binding PreviousPage}" CommandParameter="{Binding PagingVar}"  Height="35" >
+                <materialDesign:PackIcon Kind="NavigateBefore"></materialDesign:PackIcon>
+            </Button>
+            <Border>
                 <Button Height="35"  Margin="20 0 20 0">
                     <Button.Content>
                         <StackPanel>
@@ -173,17 +174,17 @@
                             <TextBlock Text=" OF "></TextBlock>
                             <TextBlock Text="{Binding PagingVar.TotalPages}"></TextBlock>
                         </StackPanel>
-                        
+
                     </Button.Content>
                 </Button>
-                    </Border>
-                    <Button Command="{Binding NextPage}" CommandParameter="{Binding PagingVar}" Height="35" >
-                        <materialDesign:PackIcon Kind="NavigateNext"></materialDesign:PackIcon>
-                    </Button>
-                </StackPanel>
-                <Grid.Background>
-                    <ImageBrush ImageSource="../Data/Images/g.png"></ImageBrush>
-                </Grid.Background>
-            </Grid>
+            </Border>
+            <Button Command="{Binding NextPage}" CommandParameter="{Binding PagingVar}" Height="35" >
+                <materialDesign:PackIcon Kind="NavigateNext"></materialDesign:PackIcon>
+            </Button>
+        </StackPanel>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Data/Images/g.png"></ImageBrush>
+        </Grid.Background>
+    </Grid>
 
 </UserControl>

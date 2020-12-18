@@ -88,8 +88,8 @@
 
 
                     <StackPanel>
-                        <materialDesign:PackIcon Margin="0 0 10 0"  Kind="ArrowBack"></materialDesign:PackIcon>
-                        <TextBlock  VerticalAlignment="Center">QUAY LẠI</TextBlock>
+                        <materialDesign:PackIcon Margin="0 0 10 0"  Kind="Check"></materialDesign:PackIcon>
+                        <TextBlock  VerticalAlignment="Center">HOÀN THÀNH</TextBlock>
                     </StackPanel>
                 </Button>
 
@@ -195,7 +195,7 @@
                                                 <TextBox x:Name="PlaceInfo" materialDesign:HintAssist.Hint="Thông tin" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Height="90"></TextBox>
                                             </StackPanel>
                                             <StackPanel   Width="250" Orientation="Vertical">
-                                                <Button Command="{Binding AddPlace}" Margin="0 5 0 0" Width="60">
+                                                <Button ToolTip="Thêm lộ trình" Command="{Binding AddPlace}" Margin="0 5 0 0" Width="60">
                                                     <materialDesign:PackIcon Kind="AddCircleOutline"></materialDesign:PackIcon>
                                                     <Button.CommandParameter>
                                                         <MultiBinding Converter="{StaticResource CPC}">

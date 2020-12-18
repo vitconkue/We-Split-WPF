@@ -23,6 +23,7 @@ namespace We_Split_WPF.ViewModel
 
         public ICommand NextPage { get; set; }
 
+        public ICommand UpdateTripFromSearch { get; set; }
         public Paging PagingVar { get; set; }
         public int tripPerPage { get; set; }
 
@@ -43,7 +44,7 @@ namespace We_Split_WPF.ViewModel
             }
         }
         public SearchPageViewModel(MainViewModel param){
-            tripPerPage = 1; 
+            tripPerPage = 8; 
             Search = new RelayCommand(o => SearchFunction(o));
             TripsToShow = new List<TripModel>(); 
             PagingVar = new Paging { CurrentPage = 1, TotalPages = 1, TripPerPage = tripPerPage };
@@ -52,6 +53,7 @@ namespace We_Split_WPF.ViewModel
             PreviousPage = new PreviousPageSearchCommand(this);
             viewModel = param;
             UpdateSearchView = new RelayCommand(o => GotoDetailPage(o));
+            UpdateTripFromSearch = new RelayCommand(o => GotoUpdatePage(o));
         }
 
         public void CalculateChanging()
@@ -112,6 +114,10 @@ namespace We_Split_WPF.ViewModel
         public void GotoDetailPage(object o)
         {
             viewModel.SelectedViewModel = new DetailPageViewModel(int.Parse(o.ToString()), viewModel);
+        }
+        public void GotoUpdatePage(object o)
+        {
+            viewModel.SelectedViewModel = new UpdatePageViewModel(int.Parse(o.ToString()), viewModel);
         }
     }
 }
