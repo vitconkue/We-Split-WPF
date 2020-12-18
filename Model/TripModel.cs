@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -157,7 +158,28 @@ namespace We_Split_WPF.Model
                 return path;
             }
         }
-        
+        public List<Uri> PlaceImages
+        {
+            get
+            {
+                List<Uri> Temp = new List<Uri>();
+                string file = AppDomain.CurrentDomain.BaseDirectory;
+                string path = $"{file}Data\\Images\\TripsImage\\{ID}\\Location\\";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                DirectoryInfo Folder = new DirectoryInfo(path);
+                
+                var Images = Folder.GetFiles();
+                foreach(var image in Images)
+                {
+                    Uri direct = new Uri(image.FullName);
+                    Temp.Add(direct);
+                }
+                return Temp;
+            }
+        }
 
 
     }
