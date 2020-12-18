@@ -327,7 +327,38 @@ namespace We_Split_WPF.Model
             return result;
         }
 
+        public static int SearchResultCount(string searchKey, bool isSearchByTripName)
+        {
+            int result = 0;
+            if (isSearchByTripName)
+            {
+                result = SearchByTripName(searchKey).Count;
+            }
+            else
+            {
+                result = SearchByMemberName(searchKey).Count;
+            }
+
+
+            return result;
+        }
         #region Paging opration
+        // for search page
+            // Get search result with page
+        public static List<TripModel> GetSearchResultWithPage(string searckey, bool isSearchByTripName, int pageNumber, int tripPerPage)
+        {
+            List<TripModel> searchResult = new List<TripModel>(); 
+            if(isSearchByTripName)
+            {
+                searchResult = SearchByTripName(searckey); 
+            }
+            else
+            {
+                searchResult = SearchByMemberName(searckey); 
+            }
+
+            return searchResult.Skip((pageNumber - 1) * tripPerPage).Take(tripPerPage).ToList(); 
+        }
 
         // Get current total trip 
         public static int GetTripCount(string filter = "all")

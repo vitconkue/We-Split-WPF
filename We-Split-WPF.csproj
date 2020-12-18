@@ -74,7 +74,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\NextPageHomeCommand.cs" />
+    <Compile Include="Command\NextPageSearchCommand.cs" />
     <Compile Include="Command\PreviousPageHomeCommand.cs" />
+    <Compile Include="Command\PreviousPageSearchCommand.cs" />
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Command\UpdateHomeViewCommand.cs" />
     <Compile Include="Command\UpdateMainViewCommand.cs" />

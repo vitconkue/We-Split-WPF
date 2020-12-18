@@ -112,7 +112,7 @@ namespace We_Split_WPF.ViewModel
 
             int tripCount = DatabaseAccess.GetTripCount();
             CalculatePaging(); 
-            TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage,PagingVar.TripPerPage);
+            TripsToShow = DatabaseAccess.GetTripWithPageInfo(PagingVar.CurrentPage,PagingVar.TripPerPage,"all");
 
             
             

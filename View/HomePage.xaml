@@ -177,7 +177,7 @@
                     </Button.Content>
                 </Button>
                     </Border>
-            <Button Command="{Binding NextPage}" CommandParameter="{Binding PagingVar}" Height="35" >
+                    <Button Command="{Binding NextPage}" CommandParameter="{Binding PagingVar}" Height="35" >
                         <materialDesign:PackIcon Kind="NavigateNext"></materialDesign:PackIcon>
                     </Button>
                 </StackPanel>

@@ -50,6 +50,10 @@ namespace We_Split_WPF.Helper
 
 
             int indexOfMatch = matchedText.IndexOf(searchText);
+            if(indexOfMatch < 0 )
+            {
+                indexOfMatch = HelperFunctions.RemovedUTF(matchedText).IndexOf(HelperFunctions.RemovedUTF(searchText)); 
+            }    
 
             // match at the beginning => higher rate
             result -= indexOfMatch;
@@ -58,7 +62,7 @@ namespace We_Split_WPF.Helper
 
             for (int i = 0; i < searchText.Length; ++i)
             {
-                if (searchText[i] == matchedText[indexOfMatch + i])
+                if (indexOfMatch >= 0  && searchText[i] == matchedText[indexOfMatch + i])
                 {
                     result++;
                 }
