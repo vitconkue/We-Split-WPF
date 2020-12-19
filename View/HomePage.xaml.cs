@@ -24,7 +24,7 @@ namespace We_Split_WPF.View
         public HomePage()
         {
             InitializeComponent();
-           
+            
            
         }
 
