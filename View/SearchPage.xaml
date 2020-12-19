@@ -61,7 +61,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.Background>
@@ -145,12 +145,12 @@
 
                 </ListView>
             </Grid>
-            <StackPanel HorizontalAlignment="Center" Grid.Row="2">
-                <Button Command="{Binding PreviousPage}" CommandParameter="{Binding PagingVar}"  Height="35" >
+            <StackPanel Height="35" Margin="0 0 0 30" HorizontalAlignment="Center" Grid.Row="2">
+                <Button Command="{Binding PreviousPage}" CommandParameter="{Binding PagingVar}"   >
                     <materialDesign:PackIcon Kind="NavigateBefore"></materialDesign:PackIcon>
                 </Button>
                 <Border>
-                    <Button Height="35"  Margin="20 0 20 0">
+                    <Button  Margin="20 0 20 0">
                         <Button.Content>
                             <StackPanel>
                                 <TextBlock Text="{Binding PagingVar.CurrentPage}"></TextBlock>
@@ -161,7 +161,7 @@
                         </Button.Content>
                     </Button>
                 </Border>
-                <Button Command="{Binding NextPage}" CommandParameter="{Binding PagingVar}" Height="35" >
+                <Button Command="{Binding NextPage}" CommandParameter="{Binding PagingVar}" >
                     <materialDesign:PackIcon Kind="NavigateNext"></materialDesign:PackIcon>
                 </Button>
             </StackPanel>
