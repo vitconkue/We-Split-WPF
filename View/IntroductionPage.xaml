@@ -38,17 +38,13 @@
             <Setter Property="CornerRadius" Value="6"></Setter>
             <Setter Property="BorderThickness" Value="0.8"></Setter>
         </Style>
-        <Style x:Key="ButtonBorder" TargetType="Border">
-            <Setter Property="Width" Value="40">
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20">
+                
+            </Setter>
+            <Setter Property="Margin" Value="20 0 0 20">
 
             </Setter>
-            <Setter Property="Height" Value="40">
-            </Setter>
-            <Setter Property="CornerRadius" Value="30"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
-            <Setter Property="BorderBrush" Value="#ff7875"></Setter>
-            <Setter Property="Background" Value="#ff7875"></Setter>
-            <Setter Property="Margin" Value="10 0"></Setter>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -62,8 +58,28 @@
                     <ImageBrush ImageSource="../Data/Images/g.png"></ImageBrush>
                 </Grid.Background>
                 <StackPanel HorizontalAlignment="Center" Grid.Row="0">
-                    <TextBlock Padding="0 20 0 0" FontSize="18">WE SPLIT APPLICATION</TextBlock>
+                    <TextBlock Padding="0 20 0 0" FontSize="23" FontWeight="Heavy" Foreground="{DynamicResource PrimaryHueDarkBrush}">WE SPLIT APPLICATION</TextBlock>
                 </StackPanel>
+            <Grid  HorizontalAlignment="Center" Grid.Row="1">
+                <StackPanel  Orientation="Vertical">
+                    <TextBlock Foreground="{DynamicResource PrimaryHueDarkBrush}">THÀNH VIÊN THỰC HIỆN:</TextBlock>
+                    <StackPanel>
+                        <TextBlock>1. Võ Xuân Hòa</TextBlock>
+                        <TextBlock FontWeight="Heavy">Github: https://github.com/Hoa-Vo</TextBlock>
+                     
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock>2. Võ Thiện An</TextBlock>
+                        <TextBlock  FontWeight="Heavy">Github: https://github.com/vitconkue</TextBlock>
+
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock>3. Nguyễn Cao Đăng Khoa</TextBlock>
+                        <TextBlock  FontWeight="Heavy">Github: https://github.com/18120186</TextBlock>
+
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
             </Grid>
    
     </Grid>

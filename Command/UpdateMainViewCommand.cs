@@ -32,7 +32,11 @@ namespace We_Split_WPF.Command
             {
                 ViewModel.SelectedViewModel = new HomePageViewModel(ViewModel);
             }
+            if (parameter.ToString() == "IntroductionPage")
+            {
+                ViewModel.SelectedViewModel = new IntroductionPageViewModel();
+            }
         }
-       
+
     }
 }

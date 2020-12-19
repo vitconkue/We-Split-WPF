@@ -28,5 +28,42 @@ namespace We_Split_WPF
         }
 
         public SearchPageViewModel SelectedViewModel { get; internal set; }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomePageIcon.Foreground = Brushes.Yellow;
+            HomePageName.Foreground = Brushes.Yellow;
+            LocationIcon.Foreground = Brushes.White;
+            LocationName.Foreground = Brushes.White;
+            InfoIcon.Foreground = Brushes.White;
+            InfoName.Foreground = Brushes.White;
+            SearchIcon.Foreground = Brushes.White;
+            SearchName.Foreground = Brushes.White;
+        }
+
+       
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomePageIcon.Foreground = Brushes.White;
+            HomePageName.Foreground = Brushes.White;
+            LocationIcon.Foreground = Brushes.White;
+            LocationName.Foreground = Brushes.White;
+            InfoIcon.Foreground = Brushes.Yellow;
+            InfoName.Foreground = Brushes.Yellow;
+            SearchIcon.Foreground = Brushes.White;
+            SearchName.Foreground = Brushes.White;
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomePageIcon.Foreground = Brushes.White;
+            HomePageName.Foreground = Brushes.White;
+            LocationIcon.Foreground = Brushes.White;
+            LocationName.Foreground = Brushes.White;
+            InfoIcon.Foreground = Brushes.White;
+            InfoName.Foreground = Brushes.White;
+            SearchIcon.Foreground = Brushes.Yellow;
+            SearchName.Foreground = Brushes.Yellow;
+        }
     }
 }

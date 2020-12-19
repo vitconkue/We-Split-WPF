@@ -125,12 +125,10 @@
                                         </StackPanel>
                                         <Border BorderThickness="0 0.6 0 0" BorderBrush="#0099FF">
                                             <StackPanel Margin="0 5 0 0"  Height="35" HorizontalAlignment="Center" VerticalAlignment="Center"  Orientation="Horizontal">
-                                                <Button ToolTip="Xem chi tiết" Background="Green"  Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}">
+                                                <Button Margin="0 0 10 0" ToolTip="Xem chi tiết" Background="Green"  Command="{Binding DataContext.UpdateHomeView, ElementName=TripListView }" CommandParameter="{Binding ID}">
                                                     <materialDesign:PackIcon Kind="Eye"></materialDesign:PackIcon>
                                                 </Button>
-                                                <Button ToolTip="Xóa chuyến đi" Background="red" Margin="10 0 10 0"  >
-                                                    <materialDesign:PackIcon Kind="Delete"></materialDesign:PackIcon>
-                                                </Button>
+                                               
                                                 <Button ToolTip="Cập nhật chuyến đi"  Command="{Binding DataContext.UpdateTripFromSearch, ElementName=TripListView }" CommandParameter="{Binding ID}">
                                                     <materialDesign:PackIcon Kind="Update"></materialDesign:PackIcon>
                                                 </Button>
